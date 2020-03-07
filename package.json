@@ -1,0 +1,23 @@
+{
+  "name": "mou",
+  "version": "1.0.0",
+  "description": "mou",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gio-Glu/internet-concierge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gio-Glu/internet-concierge/issues"
+  },
+  "homepage": "https://github.com/Gio-Glu/internet-concierge#readme",
+  "dependencies": {
+    "discord.js": "^12.0.1"
+  }
+}
