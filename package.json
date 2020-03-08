@@ -1,24 +1,26 @@
 {
-  "name": "mou",
+  "name": "kelder",
   "version": "1.0.0",
-  "description": "mou",
-  "main": "app.js",
+  "description": "",
+  "main": "bot.js",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Gio-Glu/internet-concierge.git"
-  },
   "keywords": [],
-  "author": "",
+  "author": "Giovanni",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Gio-Glu/internet-concierge/issues"
-  },
-  "homepage": "https://github.com/Gio-Glu/internet-concierge#readme",
   "dependencies": {
-    "discord.js": "^12.0.1",
-    "fs": "0.0.1-security"
+    "discord.js": "^11.5.1",
+    "fs": "0.0.1-security",
+    "moment": "^2.24.0",
+    "ms": "^2.1.2",
+    "mysql": "^2.17.1",
+    "node-fetch": "^2.6.0",
+    "setimmediate": "^1.0.5",
+    "superagent": "^5.1.0",
+    "weather-js": "^2.0.0"
   }
 }
