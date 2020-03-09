@@ -5,7 +5,7 @@ const bot = new Discord.Client({
 });
 const botconfig = require("./botconfig.json");
 bot.commands = new Discord.Collection();
-
+require('dotenv').config()
 
 
 
