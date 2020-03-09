@@ -4,7 +4,6 @@ const bot = new Discord.Client({
   partials: Object.values(["MESSAGE", "CHANNEL"]),
 });
 const botconfig = require("./botconfig.json");
-const tokenfile = require("./token.json");
 bot.commands = new Discord.Collection();
 
 
