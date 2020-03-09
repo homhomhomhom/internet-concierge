@@ -61,8 +61,6 @@ bot.on("message", async message => {
   if (commandfile) commandfile.run(bot, message, args, con);
 });
 
-
-
 bot.on('guildMemberAdd', member =>{
   const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
 
@@ -81,6 +79,43 @@ bot.on('guildMemberAdd', member =>{
   member.addRole(guest).catch(console.error)
 
 })
+
+// bot.on('message', message =>{
+//   if(message.content === botconfig.prefix + 'fetch'){
+//     // con.query(`SELECT * FROM ungrouped WHERE member_id = ${message.guild.members}`, (err, results) =>{
+//     //   if(err) throw (err)
+//     //   if(results.length === 0){
+//     //     con.query(`INSERT INTO ungrouped (member_id, member_name)`)
+//     //   }
+//     // })
+    
+//     let members = message.guild.members
+  
+    
+    
+//   }
+// })
+
+bot.on('message', message =>{
+  if(message.author.bot) return
+
+  con.query(`SELECT * FROM ungrouped WHERE member_id = ${message.author.id}`, (err, results) =>{
+    if(err) throw (err)
+
+    if(results.length === 0){
+      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${message.author.id}', '${message.author.username}')`, e =>{
+        if(e) throw(e)
+        console.log("Successfully added " + message.author.username + ' to the database')
+      })
+    }else{
+      return
+    }
+  })
+
+
+  
+})
+
 
 bot.on('message', message =>{
   if(message.content === botconfig.prefix + 'clear'){
