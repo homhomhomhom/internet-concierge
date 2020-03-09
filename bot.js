@@ -6,6 +6,13 @@ const bot = new Discord.Client({
 const botconfig = require("./botconfig.json");
 bot.commands = new Discord.Collection();
 require('dotenv').config()
+const mysql = require("mysql")
+const con = mysql.createConnection(process.env.DB)
+
+con.connect(e =>{
+  if(e) throw (e)
+  console.log('Connected to database')
+})
 
 
 
