@@ -4,9 +4,8 @@ const bot = new Discord.Client({
   partials: Object.values(["MESSAGE", "CHANNEL"]),
 });
 const botconfig = require("./botconfig.json");
-const tokenfile = require("./token.json");
 bot.commands = new Discord.Collection();
-
+require('dotenv').config()
 
 
 
@@ -58,4 +57,4 @@ bot.on("message", async message => {
 
 
 
-bot.login(tokenfile.token || process.env.TOKEN);
+bot.login(process.env.TOKEN);
