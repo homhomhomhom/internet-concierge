@@ -58,9 +58,80 @@ bot.on("message", async message => {
   let args = messageArray.slice(1);
 
   let commandfile = bot.commands.get(cmd.slice(prefix.length));
-  if (commandfile) commandfile.run(bot, message, args);
-
+  if (commandfile) commandfile.run(bot, message, args, con);
 });
+
+bot.on('guildMemberAdd', member =>{
+  const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
+
+  if(!channel) return
+
+  channel.send(`Gegroet ${member}, welkom in **gluhub_** 😳`)
+
+  con.query(`INSERT INTO ungrouped(member_id, member_name) VALUES('${member.id}', '${member.user.username}')`, e =>{
+    if(e) throw (e)
+    console.log('New member added successfully! ' + member.id)
+  })
+  console.log(member.user.username)
+
+  const guest = member.guild.roles.find(r => r.name === '[_guest_]')
+  
+  member.addRole(guest).catch(console.error)
+
+})
+
+// bot.on('message', message =>{
+//   if(message.content === botconfig.prefix + 'fetch'){
+//     // con.query(`SELECT * FROM ungrouped WHERE member_id = ${message.guild.members}`, (err, results) =>{
+//     //   if(err) throw (err)
+//     //   if(results.length === 0){
+//     //     con.query(`INSERT INTO ungrouped (member_id, member_name)`)
+//     //   }
+//     // })
+    
+//     let members = message.guild.members
+  
+    
+    
+//   }
+// })
+
+bot.on('message', message =>{
+  if(message.author.bot) return
+
+  con.query(`SELECT * FROM ungrouped WHERE member_id = ${message.author.id}`, (err, results) =>{
+    if(err) throw (err)
+
+    if(results.length === 0){
+      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${message.author.id}', '${message.author.username}')`, e =>{
+        if(e) throw(e)
+        console.log("Successfully added " + message.author.username + ' to the database')
+      })
+    }else{
+      return
+    }
+  })
+
+
+  
+})
+
+
+bot.on('message', message =>{
+  if(message.content === botconfig.prefix + 'clear'){
+    if(message.member.hasPermission("MANAGE_MESSAGES")){
+      message.channel.fetchMessages().then(
+        list = ()=>{
+          message.channel.bulkDelete(list)
+        },
+        err = () =>{
+          message.channel.send('Nope')
+        }
+      )
+    }
+  }
+})
+
 
 
 
