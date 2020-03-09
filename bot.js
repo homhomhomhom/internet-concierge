@@ -111,9 +111,6 @@ bot.on('message', message =>{
       return
     }
   })
-
-
-  
 })
 
 
@@ -130,6 +127,13 @@ bot.on('message', message =>{
       )
     }
   }
+})
+
+bot.on('guildMemberRemove', member =>{
+  const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
+  if(!channel) return
+
+  channel.send(`Oei, daar gaat **${member}** 😔`)
 })
 
 
