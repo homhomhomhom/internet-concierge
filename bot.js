@@ -7,7 +7,7 @@ const botconfig = require("./botconfig.json");
 bot.commands = new Discord.Collection();
 require('dotenv').config()
 const mysql = require("mysql")
-const con = mysql.createConnection(process.env.DB)
+const con = mysql.createConnection(process.env.JAWSDB_URL)
 
 con.connect(e =>{
   if(e) throw (e)
