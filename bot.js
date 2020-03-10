@@ -80,7 +80,8 @@ bot.on('guildMemberAdd', member =>{
     }
  })
 
-  con.query(`SELECT * FROM userlevels WHERE userID = ${member.id}`, results =>{
+  con.query(`SELECT * FROM userlevels WHERE userID = ${member.id}`, (err,results) =>{
+    if(err) throw(err)
     if(results.length === 0){
       con.query(`INSERT INTO userlevels(userLevel, userId, userName) VALUES('1', '${member.id}', '${member.user.username}')`, e =>{
         if(e) throw (e)
@@ -89,10 +90,11 @@ bot.on('guildMemberAdd', member =>{
     }else{
       return
     }
+  })
   const guest = member.guild.roles.find(r => r.name === '[_guest_]')
   
   member.addRole(guest).catch(console.error)
-  })
+  
 })
 
 // bot.on('message', message =>{
