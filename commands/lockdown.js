@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
         SEND_MESSAGES: null
       })
       .then(() => {
-        message.channel.sendMessage("Cockdown opgeheven.");
+        message.channel.sendMessage("Lockdown opgeheven.");
         clearTimeout(client.lockit[message.channel.id]);
         delete client.lockit[message.channel.id];
       })
