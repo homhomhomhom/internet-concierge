@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args)=>{
 
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-        .setFooter('Reageer om te stemmen')
+        .setFooter('Reageer om te stemmen uwu')
         .setDescription(args.join(' '))
         .setTitle(`Deze poll is gemaakt door ${message.author.username}`)
 

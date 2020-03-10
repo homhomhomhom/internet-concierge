@@ -7,7 +7,7 @@ module.exports.run = async(bot, message, args, con)=>{
         ticket_name = args.join(" ")
 
         function randomId() {
-            return Math.floor(Math.random() * 900) + 8;
+            return Math.floor(Math.random() * 900);
         }
 
         con.query(`INSERT INTO tickets(ticket_name, ticket_id) VALUES('${ticket_name}', ${randomId()})`, e =>{

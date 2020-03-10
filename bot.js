@@ -156,7 +156,7 @@ bot.on('guildMemberRemove', member =>{
 //level script
 
 function randomXP() {
-  return Math.floor(Math.random() * 900);
+  return Math.floor(Math.random() * 7) + 8;
 }
 bot.on('message', message => {
   if (message.author.bot) return;
@@ -182,7 +182,7 @@ bot.on('message', message => {
     }else{
       let curxp = `${results[0].userXP}`;
       let curLvl = `${results[0].userLevel}`;
-      let nxtLvl = `${results[0].userLevel}` * 500;
+      let nxtLvl = `${results[0].userLevel}` * 800;
       curxp = curxp + randomXP()
       if (nxtLvl <= `${results[0].userXP}`) {
         con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
@@ -197,7 +197,9 @@ bot.on('message', message => {
           .setTitle('Leveltje omhoog')
           .setColor("RANDOM")
           .addField("Nieuw leveltje", `${results[0].userLevel}`)
-        message.channel.send(lvlup)
+          message.channel.send(lvlup).then(message=>{
+            message.delete(3000)
+        })
       }
     }
   })
