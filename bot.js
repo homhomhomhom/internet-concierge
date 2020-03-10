@@ -156,14 +156,14 @@ bot.on('message', message => {
         console.log("Successfully added " + message.author.id + ' to the database')
       })
     } else {
-      con.query(`UPDATE userLevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
+      con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
         if (err) throw err;
         console.log("Successfully added user xp!")
       })
     }
 
     if (`${results[0].userLevel < 1}`) {
-      `INSERT INTO userLevels (userLevel) VALUES(1) WHERE userID = ${message.author.id}`
+      `INSERT INTO userlevels (userLevel) VALUES(1) WHERE userID = ${message.author.id}`
     }
 
     
@@ -174,7 +174,7 @@ bot.on('message', message => {
     let nxtLvl = `${results[0].userLevel}` * 500;
     curxp = curxp + randomXP()
     if (nxtLvl <= `${results[0].userXP}`) {
-      con.query(`UPDATE userLevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
+      con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
         if (err) throw err;
         console.log("leveltje omhoog")
       })
