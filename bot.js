@@ -72,6 +72,10 @@ bot.on('guildMemberAdd', member =>{
     if(e) throw (e)
     console.log('New member added successfully! ' + member.id)
   })
+  con.query(`INSERT INTO userlevels(userLevel, userId, userName) VALUES('1', '${member.id}', '${member.user.username}')`, e =>{
+    if(e) throw (e)
+    console.log('New member added to levels successfully!' + member.id)
+  })
   console.log(member.user.username)
 
   const guest = member.guild.roles.find(r => r.name === '[_guest_]')
@@ -136,6 +140,57 @@ bot.on('guildMemberRemove', member =>{
   channel.send(`Oei, daar gaat **${member}** 😔`)
 })
 
+//level script
+
+function randomXP() {
+  return Math.floor(Math.random() * 7) + 8;
+}
+bot.on('message', message => {
+  if (message.author.bot) return;
+
+  con.query(`SELECT * FROM userlevels WHERE userID = ${message.author.id}`, (err, results) => {
+    if (err) throw (err)
+    if (results.length === 0) {
+      con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
+        if (err) throw err;
+        console.log("Successfully added " + message.author.id + ' to the database')
+      })
+    } else {
+      con.query(`UPDATE userLevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
+        if (err) throw err;
+        console.log("Successfully added user xp!")
+      })
+    }
+
+    if (`${results[0].userLevel < 1}`) {
+      `INSERT INTO userLevels (userLevel) VALUES(1) WHERE userID = ${message.author.id}`
+    }
+
+    
+    user = message.author;
+
+    let curxp = `${results[0].userXP}`;
+    let curLvl = `${results[0].userLevel}`;
+    let nxtLvl = `${results[0].userLevel}` * 500;
+    curxp = curxp + randomXP()
+    if (nxtLvl <= `${results[0].userXP}`) {
+      con.query(`UPDATE userLevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
+        if (err) throw err;
+        console.log("leveltje omhoog")
+      })
+      curLvl = `${results[0].userLevel}`;
+
+      let lvlup = new Discord.RichEmbed()
+        .setThumbnail(user.avatarURL)
+        .setAuthor(user.username)
+        .setTitle('Leveltje omhoog')
+        .setColor("RANDOM")
+        .addField("Nieuw leveltje", `${results[0].userLevel}`)
+      message.channel.send(lvlup)
+    }
+  })
+})
+//level up
 
 
 
