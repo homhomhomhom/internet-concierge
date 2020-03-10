@@ -148,33 +148,34 @@ function randomXP() {
 bot.on('message', message => {
   if (message.author.bot) return;
 
-  con.query(`SELECT * FROM userLevels WHERE userID = ${message.author.id}`, (e, results) => {
+  con.query(`SELECT * FROM userlevels WHERE userId = ${message.author.id}`, (e, results) => {
     if (e) throw (e)
     if (results.length === 0) {
-      con.query(`INSERT INTO userLevels (userID, userXP, userLevel) VALUES ('${message.author.id}', ${randomXP()}, 1)`, e => {
+      con.query(`INSERT INTO userlevels (userId, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, ${message.author.username})`, e => {
         if (e) throw e;
         console.log("Successfully added " + message.author.id + ' to the database')
       })
     } else {
-      con.query(`UPDATE userLevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, e => {
+      con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userId = ${message.author.id}`, e => {
         if (e) throw e;
         console.log("Successfully added user xp!")
-      })
+      })  
     }
 
-    if (`${results[0].userLevel < 1}`) {
-      `INSERT INTO userLevels (userLevel) VALUES(1) WHERE userID = ${message.author.id}`
+    if (`${results[0].userlevels.userLevel < 1}`) {
+      `INSERT INTO userlevels (userLevel) VALUES(1) WHERE userId = ${message.author.id}`
     }
 
     
     user = message.author;
+     
 
-    let curxp = `${results[0].userXP}`;
-    let curLvl = `${results[0].userLevel}`;
-    let nxtLvl = `${results[0].userLevel}` * 500;
+    let curxp = `${results[0].userlevels.userXP}`;
+    let curLvl = `${results[0].userlevels.userLevel}`;
+    let nxtLvl = `${results[0].userlevels.userLevel}` * 500;
     curxp = curxp + randomXP()
     if (nxtLvl <= `${results[0].userXP}`) {
-      con.query(`UPDATE userLevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, e => {
+      con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userId = ${message.author.id}`, e => {
         if (e) throw e;
         console.log("leveltje omhoog")
       })
