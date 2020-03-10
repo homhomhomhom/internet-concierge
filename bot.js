@@ -68,16 +68,33 @@ bot.on('guildMemberAdd', member =>{
 
   channel.send(`Gegroet ${member}, welkom in **gluhub_** 😳`)
 
-  con.query(`INSERT INTO ungrouped(member_id, member_name) VALUES('${member.id}', '${member.user.username}')`, e =>{
-    if(e) throw (e)
-    console.log('New member added successfully! ' + member.id)
-  })
-  console.log(member.user.username)
+  con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
+    if(err) throw (err)
+    if(results.length === 0){
+      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${member.id}', '${member.username}')`, e =>{
+        if(e) throw(e)
+        console.log("Successfully added " + member.username + ' to the database')
+      })
+    }else{
+      return
+    }
+ })
 
+  con.query(`SELECT * FROM userlevels WHERE userID = ${member.id}`, (err,results) =>{
+    if(err) throw(err)
+    if(results.length === 0){
+      con.query(`INSERT INTO userlevels(userLevel, userId, userName) VALUES('1', '${member.id}', '${member.user.username}')`, e =>{
+        if(e) throw (e)
+        console.log('New member added to levels successfully!' + member.id)
+      })
+    }else{
+      return
+    }
+  })
   const guest = member.guild.roles.find(r => r.name === '[_guest_]')
   
   member.addRole(guest).catch(console.error)
-
+  
 })
 
 // bot.on('message', message =>{
@@ -136,7 +153,58 @@ bot.on('guildMemberRemove', member =>{
   channel.send(`Oei, daar gaat **${member}** 😔`)
 })
 
+//level script
 
+function randomXP() {
+  return Math.floor(Math.random() * 7) + 8;
+}
+bot.on('message', message => {
+  if (message.author.bot) return;
+
+  con.query(`SELECT * FROM userlevels WHERE userID = ${message.author.id}`, (err, results) => {
+    if (err) throw (err)
+    if (results.length === 0) {
+      con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
+        if (err) throw (err);
+        console.log("Successfully added " + message.author.id + ' to the database')
+      })
+    } else {
+      con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
+        if (err) throw err;
+        console.log("Successfully added user xp!")
+      })
+    }
+    
+    user = message.author;
+
+    if(results.length === 0){
+      return
+    }else{
+      let curxp = `${results[0].userXP}`;
+      let curLvl = `${results[0].userLevel}`;
+      let nxtLvl = `${results[0].userLevel}` * 800;
+      curxp = curxp + randomXP()
+      if (nxtLvl <= `${results[0].userXP}`) {
+        con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
+          if (err) throw err;
+          console.log("leveltje omhoog")
+        })
+        curLvl = `${results[0].userLevel}`;
+
+        let lvlup = new Discord.RichEmbed()
+          .setThumbnail(user.avatarURL)
+          .setAuthor(user.username)
+          .setTitle('Leveltje omhoog')
+          .setColor("RANDOM")
+          .addField("Nieuw leveltje", `${results[0].userLevel}`)
+          message.channel.send(lvlup).then(message=>{
+            message.delete(3000)
+        })
+      }
+    }
+  })
+})
+//level up
 
 
 bot.login(process.env.TOKEN);
