@@ -4,7 +4,12 @@ module.exports.run = async(bot, message, args, con)=>{
     if(!message.member.hasPermission("MANAGE_MESSAGES")){
         errors.noPerms(message, "MANAGE_MESSAGES")
     }else{
-        message.channel.send('lmao')
+        ticket_name = args.join(" ")
+
+        con.query(`INSERT INTO tickets(ticket_name) VALUES('${ticket_name}')`, e =>{
+            if(e) throw(e)
+            console.log('successfully added ticket')
+        })
     }   
 }
 
