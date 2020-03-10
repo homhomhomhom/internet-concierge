@@ -197,14 +197,14 @@ bot.on('message', message => {
           .setTitle('Leveltje omhoog')
           .setColor("RANDOM")
           .addField("Nieuw leveltje", `${results[0].userLevel}`)
-          message.channel.send(lvlup).then(message=>{
-            message.delete(3000)
-        })
+        
+          const channelL = bot.channels.find(ch => ch.id ==='686951092986052620')
+          if(message.author.bot) return
+          channelL.send(lvlup)
       }
     }
   })
 })
-//level up
 
 
 bot.login(process.env.TOKEN);
