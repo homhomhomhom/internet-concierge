@@ -164,24 +164,28 @@ bot.on('message', message => {
     
     user = message.author;
 
-    let curxp = `${results[0].userXP}`;
-    let curLvl = `${results[0].userLevel}`;
-    let nxtLvl = `${results[0].userLevel}` * 10;
-    curxp = curxp + randomXP()
-    if (nxtLvl <= `${results[0].userXP}`) {
-      con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
-        if (err) throw err;
-        console.log("leveltje omhoog")
-      })
-      curLvl = `${results[0].userLevel}`;
+    if(results.length === 0){
+      return
+    }else{
+      let curxp = `${results[0].userXP}`;
+      let curLvl = `${results[0].userLevel}`;
+      let nxtLvl = `${results[0].userLevel}` * 500;
+      curxp = curxp + randomXP()
+      if (nxtLvl <= `${results[0].userXP}`) {
+        con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
+          if (err) throw err;
+          console.log("leveltje omhoog")
+        })
+        curLvl = `${results[0].userLevel}`;
 
-      let lvlup = new Discord.RichEmbed()
-        .setThumbnail(user.avatarURL)
-        .setAuthor(user.username)
-        .setTitle('Leveltje omhoog')
-        .setColor("RANDOM")
-        .addField("Nieuw leveltje", `${results[0].userLevel}`)
-      message.channel.send(lvlup)
+        let lvlup = new Discord.RichEmbed()
+          .setThumbnail(user.avatarURL)
+          .setAuthor(user.username)
+          .setTitle('Leveltje omhoog')
+          .setColor("RANDOM")
+          .addField("Nieuw leveltje", `${results[0].userLevel}`)
+        message.channel.send(lvlup)
+      }
     }
   })
 })
