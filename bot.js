@@ -68,20 +68,33 @@ bot.on('guildMemberAdd', member =>{
 
   channel.send(`Gegroet ${member}, welkom in **gluhub_** 😳`)
 
-  con.query(`INSERT INTO ungrouped(member_id, member_name) VALUES('${member.id}', '${member.user.username}')`, e =>{
-    if(e) throw (e)
-    console.log('New member added successfully! ' + member.id)
-  })
-  con.query(`INSERT INTO userlevels(userLevel, userId, userName) VALUES('1', '${member.id}', '${member.user.username}')`, e =>{
-    if(e) throw (e)
-    console.log('New member added to levels successfully!' + member.id)
-  })
-  console.log(member.user.username)
+  con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
+    if(err) throw (err)
+    if(results.length === 0){
+      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${member.id}', '${member.username}')`, e =>{
+        if(e) throw(e)
+        console.log("Successfully added " + member.username + ' to the database')
+      })
+    }else{
+      return
+    }
+ })
 
+  con.query(`SELECT * FROM userlevels WHERE userID = ${member.id}`, (err,results) =>{
+    if(err) throw(err)
+    if(results.length === 0){
+      con.query(`INSERT INTO userlevels(userLevel, userId, userName) VALUES('1', '${member.id}', '${member.user.username}')`, e =>{
+        if(e) throw (e)
+        console.log('New member added to levels successfully!' + member.id)
+      })
+    }else{
+      return
+    }
+  })
   const guest = member.guild.roles.find(r => r.name === '[_guest_]')
   
   member.addRole(guest).catch(console.error)
-
+  
 })
 
 // bot.on('message', message =>{
