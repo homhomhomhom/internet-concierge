@@ -6,7 +6,11 @@ module.exports.run = async(bot, message, args, con)=>{
     }else{
         ticket_name = args.join(" ")
 
-        con.query(`INSERT INTO tickets(ticket_name) VALUES('${ticket_name}')`, e =>{
+        function randomId() {
+            return Math.floor(Math.random() * 900) + 8;
+        }
+
+        con.query(`INSERT INTO tickets(ticket_name, ticket_id) VALUES('${ticket_name}', ${randomId()})`, e =>{
             if(e) throw(e)
             console.log('successfully added ticket')
         })
