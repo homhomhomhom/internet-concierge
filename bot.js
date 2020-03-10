@@ -151,7 +151,7 @@ bot.on('message', message => {
   con.query(`SELECT * FROM userlevels WHERE userID = ${message.author.id}`, (err, results) => {
     if (err) throw (err)
     if (results.length === 0) {
-      con.query(`INSERT INTO userLevels (userID, userXP, userLevel) VALUES ('${message.author.id}', ${randomXP()}, 1)`, err => {
+      con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
         if (err) throw err;
         console.log("Successfully added " + message.author.id + ' to the database')
       })
