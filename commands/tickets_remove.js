@@ -7,16 +7,16 @@ module.exports.run = async(bot, message, args, con)=>{
         ticket_name = args.join(" ")
 
         function randomId() {
-            return Math.floor(Math.random() * 900);
+            return Math.floor(Math.random() * 900) + 8;
         }
-
-        con.query(`INSERT INTO tickets(ticket_name, ticket_id) VALUES('${ticket_name}', ${randomId()})`, e =>{
+        con.query(`DELETE FROM tickets WHERE ticket_name = '${ticket_name}'`, e =>{
             if(e) throw(e)
-            console.log('successfully added ticket')
+            console.log('successfully removed ticket')
+            message.channel.send(`Ik heb ` + ticket_name + ' verwijderd.' )
         })
     }   
 }
 
 module.exports.help ={
-    name:'ticket_add'
+    name:'ticket_del'
 }
