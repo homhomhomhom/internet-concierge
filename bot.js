@@ -141,6 +141,12 @@ bot.on('guildMemberRemove', member =>{
 })
 
 //level script
+
+function randomXP() {
+  return Math.floor(Math.random() * 7) + 8;
+}
+
+
 bot.on('message', message => {
   if (message.author.bot) return;
 
