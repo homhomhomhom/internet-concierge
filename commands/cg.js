@@ -14,7 +14,7 @@ module.exports.run = async(bot,message,args,con) =>{
             if(r.length === 0 && group_name.length > 2){
                 con.query(`INSERT INTO groups(group_name, group_id) VALUES ('${group_name}', ${randomId()})`, e =>{
                     if(e) throw e
-                    console.log("Group successfully added")
+                    console.log(`${message.author.username} heeft ${group_name} aangemaakt`)
                     message.channel.send(`Group **${group_name}** is succesvol aangemaakt`)
                 })
             }

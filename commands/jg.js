@@ -12,7 +12,8 @@ module.exports.run = async(bot,message,args,con) =>{
                 message.channel.send(`Groep **${group_name}** bestaat niet :/`)
             }else{
                 con.query(`INSERT INTO grouped (member_id, member_name, group_name, group_id) VALUES('${message.author.id}', '${message.author.username}', '${r[0].group_name}', '${r[0].group_id}')`)
-                console.log(`${message.author.username} join group: ${group_name}`)
+                
+                console.log(`${message.author.username} joined group: ${group_name}`)
 
                 message.channel.send(`Je bent **${group_name}** met success gejoined!`)
             }
