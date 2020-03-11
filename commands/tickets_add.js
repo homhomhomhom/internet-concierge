@@ -10,9 +10,18 @@ module.exports.run = async(bot, message, args, con)=>{
             return Math.floor(Math.random() * 900);
         }
 
-        con.query(`INSERT INTO tickets(ticket_name, ticket_id) VALUES('${ticket_name}', ${randomId()})`, e =>{
-            if(e) throw(e)
-            console.log('successfully added ticket')
+        con.query(`SELECT * FROM tickets WHERE ticket_name = '${ticket_name}'`, (err, results) => {
+            if (err) throw err;
+            if (results.length === 0) {
+
+                con.query(`INSERT INTO tickets(ticket_name, ticket_id) VALUES('${ticket_name}', ${randomId()})`, e => {
+                    if (e) throw (e)
+                    console.log('successfully added ticket')
+                    message.channel.send(`Ticket ${ticket_name} succesvol toegevoegd`)
+                })
+            } else {
+                message.channel.send("Er is al een ticket met die naam")
+            }
         })
     }   
 }
