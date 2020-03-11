@@ -11,6 +11,7 @@ module.exports.run = async (bot, message, args, con) =>{
                 let sicon = message.guild.iconURL
                 let embedLB = new Discord.RichEmbed()
                     .setTitle('**gluhub_** leaderboard')
+                    .setThumbnail(sicon)
                     .addField('Nummer 1' , `Gebruiker: ${results[0].userName}`)
                     .addField(`Level: ${results[0].userLevel}`, `XP: ${results[0].userXP}`)
                     .addField('Nummer 2' , `Gebruiker: ${results[1].userName}`)

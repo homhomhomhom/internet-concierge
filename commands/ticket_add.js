@@ -17,7 +17,7 @@ module.exports.run = async(bot, message, args, con)=>{
                 con.query(`INSERT INTO tickets(ticket_name, ticket_id) VALUES('${ticket_name}', ${randomId()})`, e => {
                     if (e) throw (e)
                     console.log('successfully added ticket')
-                    message.channel.send(`Ticket ${ticket_name} succesvol toegevoegd`)
+                    message.channel.send(`Ticket **${ticket_name}** succesvol toegevoegd`)
                 })
             } else {
                 message.channel.send("Er is al een ticket met die naam")
