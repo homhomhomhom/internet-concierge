@@ -8,3 +8,4 @@
 
 [] Als er minder dan 5 mensen in de database staan vind de leaderboard command dat niet leuk
 []Als er een ticket niet bestaat moet dat aangegeven worden door de bot als je die wilt verwijderen
+[]als het groepje wat je wilt maken al bestaat moet de bot dat laten weten
