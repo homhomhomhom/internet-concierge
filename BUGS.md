@@ -9,3 +9,4 @@
 ## Rondkruipend
 
 [] Als er minder dan 5 mensen in de database staan vind de leaderboard command dat niet leuk
+[]bot maakt groep aan ookal is er geen naam ingevoerd
