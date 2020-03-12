@@ -12,7 +12,7 @@ module.exports.run = async(bot, message, args, con)=>{
         con.query(`DELETE FROM tickets WHERE ticket_name = '${ticket_name}'`, e =>{
             if(e) throw(e)
             console.log('successfully removed ticket')
-            message.channel.send(`Ik heb ${ticket_name} verwijderd`)
+            message.channel.send(`Ik heb **${ticket_name}** verwijderd`)
         })
     }   
 }
