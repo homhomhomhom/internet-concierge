@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
         
        
     message.author.send(embedH)
-    message.channel.send('Heb je een berichtje gestuurd')
+    message.channel.send('Heb je een berichtje gestuurd.')
 
 
 }
