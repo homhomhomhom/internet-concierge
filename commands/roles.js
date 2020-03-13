@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) =>{
     const filter = (reaction, user) => ['🇦', '🇧', '🇨'].includes(reaction.emoji.name) && user.id === message.author.id;
 
     const embed = new RichEmbed()
-        .setTitle('Avaiilable Roles')
+        .setTitle('Beschikbare rollen')
         .setDescription(`
         
         🇦 ${a.toString()}
@@ -82,5 +82,5 @@ module.exports.run = async (bot, message, args) =>{
 };
 
 exports.help = {
-    name: 'roles'
+    name: 'rollen'
 };
