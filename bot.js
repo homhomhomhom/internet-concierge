@@ -198,7 +198,7 @@ bot.on('message', message => {
           .setColor("RANDOM")
           .addField("Nieuw leveltje", `${results[0].userLevel}`)
         
-          const channelL = bot.channels.find(ch => ch.id ==='686951092986052620')
+          const channelL = bot.channels.find(ch => ch.id ==='687975218253135884')
           if(message.author.bot) return
           channelL.send(lvlup)
       }
