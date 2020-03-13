@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args)=>{
 
         if(command === botconfig.prefix + 'announce'){
             message.delete()
-            let channel = message.guild.channels.get("683339571962052738")
+            let channel = message.guild.channels.get("687975638585704483")
             let announcement = args.slice(0).join(" ")
             channel.send(announcement)
         }
