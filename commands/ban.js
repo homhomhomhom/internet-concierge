@@ -15,16 +15,16 @@ module.exports.run = async(bot, message, args)=>{
         return message.channel.send("Doei")
     }
     let bReason = args.join(" ").slice(22)
-    if(!bReason) bReason = 'Stoffelo is onze papa'
+    if(!bReason) bReason = 'Er is geen reden opgegeven'
 
     if(bUser.id === message.author.id){
-        message.channel.send ('waarom wil jij jezelf bannen')
+        message.channel.send ('Je kan jezelf niet bannen')
     }else{
         let banEmbed = new Discord.RichEmbed()
         .setDescription('Ban')
         .setColor("#bc0000")
         .addField('Gebruiker verbannen', bUser.user.username)
-        .addField('Verbannen door', 'Bente')
+        .addField('Verbannen door', message.author.username)
         .addField("Reden", bReason)
 
         message.guild.member(bUser).ban(bReason)

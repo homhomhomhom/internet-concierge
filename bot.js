@@ -66,7 +66,7 @@ bot.on('guildMemberAdd', member =>{
 
   if(!channel) return
 
-  channel.send(`Gegroet ${member}, welkom in **gluhub_** 😳`)
+  channel.send(`Gegroet ${member}, welkom in **${member.guild.name}** 😳`)
 
   con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
     if(err) throw (err)
@@ -91,27 +91,11 @@ bot.on('guildMemberAdd', member =>{
       return
     }
   })
-  const guest = member.guild.roles.find(r => r.name === '[_guest_]')
+  const guest = member.guild.roles.find(r => r.name === 'Studenten')
   
   member.addRole(guest).catch(console.error)
   
 })
-
-// bot.on('message', message =>{
-//   if(message.content === botconfig.prefix + 'fetch'){
-//     // con.query(`SELECT * FROM ungrouped WHERE member_id = ${message.guild.members}`, (err, results) =>{
-//     //   if(err) throw (err)
-//     //   if(results.length === 0){
-//     //     con.query(`INSERT INTO ungrouped (member_id, member_name)`)
-//     //   }
-//     // })
-    
-//     let members = message.guild.members
-  
-    
-    
-//   }
-// })
 
 bot.on('message', message =>{
   if(message.author.bot) return
@@ -197,14 +181,14 @@ bot.on('message', message => {
           .setTitle('Leveltje omhoog')
           .setColor("RANDOM")
           .addField("Nieuw leveltje", `${results[0].userLevel}`)
-          message.channel.send(lvlup).then(message=>{
-            message.delete(3000)
-        })
+        
+          const channelL = bot.channels.find(ch => ch.id ==='687975218253135884')
+          if(message.author.bot) return
+          channelL.send(lvlup)
       }
     }
   })
 })
-//level up
 
 
 bot.login(process.env.TOKEN);
