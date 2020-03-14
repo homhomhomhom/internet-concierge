@@ -97,22 +97,6 @@ bot.on('guildMemberAdd', member =>{
   
 })
 
-// bot.on('message', message =>{
-//   if(message.content === botconfig.prefix + 'fetch'){
-//     // con.query(`SELECT * FROM ungrouped WHERE member_id = ${message.guild.members}`, (err, results) =>{
-//     //   if(err) throw (err)
-//     //   if(results.length === 0){
-//     //     con.query(`INSERT INTO ungrouped (member_id, member_name)`)
-//     //   }
-//     // })
-    
-//     let members = message.guild.members
-  
-    
-    
-//   }
-// })
-
 bot.on('message', message =>{
   if(message.author.bot) return
 
