@@ -64,7 +64,7 @@ bot.on("message", async message => {
 bot.on('guildMemberAdd', member =>{
   const channel = member.guild.channels.find(ch => ch.id ==="687969872621469845")
   const mention = member.guild.channels.find(ch => ch.name === 'regels').toString()
-  const rollen = member.guild.channel.sfind(ch => ch.name ==='rollen').toString()
+  const rollen = member.guild.channel.find(ch => ch.name ==='rollen').toString()
   if(!channel) return
 
   channel.send(`Welkom student ${member} van het GLU! Lees eerst ${mention} en kijk daarna in ${rollen} om je klas doortegeven`)
