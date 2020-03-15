@@ -91,7 +91,7 @@ bot.on('guildMemberAdd', member =>{
       return
     }
   })
-  const guest = member.guild.roles.find(r => r.name === 'Studenten')
+  const guest = member.guild.roles.find(r => r.name === 'Nieuw Lid')
   
   member.addRole(guest).catch(console.error)
   
