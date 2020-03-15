@@ -393,7 +393,7 @@ bot.on('message', message => {
     if (results.length === 0) {
       con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
         if (err) throw (err);
-        console.log("Successfully added " + message.author.id + ' to the database')
+        console.log("Successfully added " + message.author.username + ' to the database')
       })
     } else {
       con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
