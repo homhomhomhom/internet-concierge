@@ -211,6 +211,16 @@ bot.on('message', message =>{
   }
 })
 
+bot.on('message', message =>{
+  const channelR = bot.channels.find(ch => ch.id === '688720597005500467')
+  if(message.author.bot) return
+  if(message.channel === channelR){
+    message.delete(5000)
+  }else{
+    return
+  }
+})
+
 bot.on('guildMemberRemove', member =>{
   const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
   if(!channel) return
