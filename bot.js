@@ -66,7 +66,7 @@ bot.on('guildMemberAdd', member =>{
   const mention = member.guild.channels.find(ch => ch.name === 'regels').toString()
   if(!channel) return
 
-  channel.send(`Welkom student ${member} van het GLU! Lees eerst  ${mention}😳`)
+  channel.send(`Welkom student ${member} van het GLU! Lees eerst  ${mention}`)
 
   con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
     if(err) throw (err)
