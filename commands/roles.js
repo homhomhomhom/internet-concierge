@@ -3,7 +3,7 @@ const {prefix} = require('../botconfig')
 
 module.exports.run = async (bot, message, args) =>{
     if(message.author.bot) return
-    const channelR = bot.channels.find(ch => ch.id === '687997468335669269')
+    const channelR = bot.channels.find(ch => ch.id === '688720597005500467')
     if(message.channel=== channelR){
 
         const a = message.guild.roles.get('687994607828467733'); // Moderator
