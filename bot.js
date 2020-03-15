@@ -167,7 +167,7 @@ bot.on('message', message =>{
       member.addRole(_1wd2).catch(console.error)
 
       message.channel.send(`Je bent nu lid van **${_1wd2.name}**`).then(m => m.delete(6000))
-      console.log(`Successfully added ${message.author.username} to ${_1wd2}`)
+      console.log(`Successfully added ${message.author.username} to ${_1wd2.name}`)
       break;
     case '1WD3'.toLowerCase():
       const _1wd3 = message.guild.roles.find(r => r.name ==='1WD3')
