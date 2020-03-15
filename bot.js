@@ -79,7 +79,7 @@ bot.on('guildMemberAdd', member =>{
       return
     }
  })
-
+ 
   con.query(`SELECT * FROM userlevels WHERE userID = ${member.id}`, (err,results) =>{
     if(err) throw(err)
     if(results.length === 0){

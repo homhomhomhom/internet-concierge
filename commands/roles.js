@@ -14,8 +14,11 @@ module.exports.run = async (bot, message, args) =>{
         const f = message.guild.roles.get('688699692141379586') //1WD1
         const g = message.guild.roles.get('688698574481129529') //1WD2
         const h = message.guild.roles.get('688698682178142242') //1WD3
-        const i = message.guild.roles.get('')
-        const filter = (reaction, user) => ['🇦', '🇧', '🇨', '😎', '💨', '🕋', '👉', '👈'].includes(reaction.emoji.name) && user.id === message.author.id;
+        const i = message.guild.roles.get('688698692655644743') //2WD1
+        const j = message.guild.roles.get('688700050528010250') //2WD2
+        const k = message.guild.roles.get('688700263242268691') //4IV1
+        const l = message.guild.roles.get('688700433128357904') //4IV2
+        const filter = (reaction, user) => ['🇦', '🇧', '🇨', '😎', '💨', '🕋', '👉', '👈', '👹', '🕺', '👀', '👁️'].includes(reaction.emoji.name) && user.id === message.author.id;
 
         const embed = new RichEmbed()
             .setTitle('Beschikbare ')
@@ -29,6 +32,10 @@ module.exports.run = async (bot, message, args) =>{
             🕋 ${f.toString()}
             👉 ${g.toString()}
             👈 ${h.toString()}
+            👹 ${i.toString()}
+            🕺 ${j.toString()}
+            👀 ${k.toString()}
+            👁️ ${l.toString()}
             `)
             .setColor(0xdd9323)
             .setFooter(`ID: ${message.author.id}`);
@@ -43,6 +50,10 @@ module.exports.run = async (bot, message, args) =>{
             await msg.react('🕋')
             await msg.react('👉')
             await msg.react('👈')
+            await msg.react('👹')
+            await msg.react('🕺')
+            await msg.react('👀')
+            await msg.react('👁️')
             msg.awaitReactions(filter, {
                 max: 1,
                 time: 30000,
@@ -132,9 +143,49 @@ module.exports.run = async (bot, message, args) =>{
                         })
                         message.channel.send(`Je bent nu lid van **${h.name}**.`).then(m => m.delete(6000))
                         break;
+                    case '👹':
+                        if(message.member.roles.has(i.id)){
+                            return message.channel.send(`Makker, je bent al lid van **${i.name}**.`).then(m => m.delete(6000))
+                        }
+                        message.member.addRole(i).catch(err=>{
+                            console.log(err)
+                            return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
+                        })
+                        message.channel.send(`Je bent nu lid van **${i.name}**.`).then(m => m.delete(6000))
+                        break;
+                    case '🕺':
+                        if(message.member.roles.has(j.id)){
+                            return message.channel.send(`Makker, je bent al lid van **${j.name}**.`).then(m => m.delete(6000))
+                        }
+                        message.member.addRole(j).catch(err=>{
+                            console.log(err)
+                            return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
+                        })
+                        message.channel.send(`Je bent nu lid van **${j.name}**.`).then(m => m.delete(6000))
+                      break;
+                    case '👀':
+                        if(message.member.roles.has(k.id)){
+                            return message.channel.send(`Makker, je bent al lid van **${k.name}**.`).then(m => m.delete(6000))
+                        }
+                        message.member.addRole(k).catch(err=>{
+                            console.log(err)
+                            return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
+                        })
+                        message.channel.send(`Je bent nu lid van **${k.name}**.`).then(m => m.delete(6000))
+                      break;
+                    case '👁️':
+                        if(message.member.roles.has(l.id)){
+                            return message.channel.send(`Makker, je bent al lid van **${l.name}**.`).then(m => m.delete(6000))
+                        }
+                        message.member.addRole(l).catch(err=>{
+                            console.log(err)
+                            return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
+                        })
+                        message.channel.send(`Je bent nu lid van **${l.name}**.`).then(m => m.delete(6000))
+                      break;
                 }
             }).catch(collected => {
-                return message.channel.send(`Ik heb je niet kunnne toevoegen`).then(m => m.delete(6000))
+                return message.channel.send(`Ik heb je niet kunnen toevoegen`).then(m => m.delete(6000))
             });
         });
     }else{
