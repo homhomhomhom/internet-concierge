@@ -71,21 +71,21 @@ bot.on('guildMemberAdd', member =>{
   con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
     if(err) throw (err)
     if(results.length === 0){
-      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${member.id}', '${member.username}')`, e =>{
+      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${member.id}', '${member.user.username}')`, e =>{
         if(e) throw(e)
-        console.log(`Successfully added ${member.username} to the database`)
+        console.log(`Successfully added ${member.user.username} to the database`)
       })
     }else{
       return
     }
  })
 
- con.query(`SELECT * FROM studentent WHERE student_id =${member.id}`, (e, r)=>{
+ con.query(`SELECT * FROM studenten WHERE student_id =${member.id}`, (e, r)=>{
    if(e) throw e
    if(r.length === 0){
-     con.query(`INSERT INTO studenten (student_id, student_name) VALUES('${member.id}', '${member.username}')`, e =>{
+     con.query(`INSERT INTO studenten (student_id, student_name) VALUES('${member.id}', '${member.user.username}')`, e =>{
        if(e) throw e
-       console.log(`Successfully saved ${member.username} in the students table`)
+       console.log(`Successfully saved ${member.user.username} in the students table`)
      })
    }
  })
@@ -95,7 +95,7 @@ bot.on('guildMemberAdd', member =>{
     if(results.length === 0){
       con.query(`INSERT INTO userlevels(userLevel, userId, userName) VALUES('1', '${member.id}', '${member.user.username}')`, e =>{
         if(e) throw (e)
-        console.log(`Successfully added ${member.username} to the level table`)
+        console.log(`Successfully added ${member.user.username} to the level table`)
       })
     }else{
       return
@@ -126,10 +126,10 @@ bot.on('message', message =>{
 
 bot.on('message', message =>{
   if(message.author.bot) return
-  con.query(`SELECT * FROM students WHERE student_id = ${message.author.id}`, (e, r)=>{
+  con.query(`SELECT * FROM studenten WHERE student_id = ${message.author.id}`, (e, r)=>{
     if(e) throw e
     if(r.length === 0){
-      con.query(`INSERT INTO students (student_id, student_name) VALUES('${message.author.id}', '${message.author.username}')`,e =>{
+      con.query(`INSERT INTO studenten (student_id, student_name) VALUES('${message.author.id}', '${message.author.username}')`,e =>{
         if(e) throw e
 
         console.log(`Successfully added ${message.author.username} to the students table`)
