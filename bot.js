@@ -422,7 +422,7 @@ bot.on('message', message => {
     } else {
       con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
         if (err) throw err;
-        console.log("Successfully added user xp!")
+        console.log(`Successfully added xp to ${message.author.username}`)
       })
     }
     
@@ -438,7 +438,7 @@ bot.on('message', message => {
       if (nxtLvl <= `${results[0].userXP}`) {
         con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
           if (err) throw err;
-          console.log("leveltje omhoog")
+          console.log(`${message.author.username} just levelled up`)
         })
         curLvl = `${results[0].userLevel}`;
 
