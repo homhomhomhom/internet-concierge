@@ -63,10 +63,10 @@ bot.on("message", async message => {
 
 bot.on('guildMemberAdd', member =>{
   const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
-
+  const mention = member.guild.channels.find(ch => ch.name === 'regels').toString()
   if(!channel) return
 
-  channel.send(`Gegroet ${member}, welkom in **${member.guild.name}** 😳`)
+  channel.send(`Welkom student ${member} van het GLU! Lees eerst  ${mention}😳`)
 
   con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
     if(err) throw (err)
@@ -139,7 +139,7 @@ bot.on('guildMemberRemove', member =>{
 
 //level script
 
-function randomXP() {
+randomXP= () => {
   return Math.floor(Math.random() * 7) + 8;
 }
 bot.on('message', message => {
