@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) =>{
                         break;
                 }
             }).catch(collected => {
-                return message.channel.send(`I couldn't add you to this role!`);
+                return message.channel.send(`Er is iets fouts gegaan`);
             });
         });
     }else{
