@@ -11,7 +11,11 @@ module.exports.run = async (bot, message, args) =>{
         const c = message.guild.roles.get('687976061505765411') //2MD1
         const d = message.guild.roles.get('687976206741667941') //2MD2
         const e = message.guild.roles.get('688698857420488733') //3MD1
-        const filter = (reaction, user) => ['🇦', '🇧', '🇨', '😎', '💨'].includes(reaction.emoji.name) && user.id === message.author.id;
+        const f = message.guild.roles.get('688699692141379586') //1WD1
+        const g = message.guild.roles.get('688698574481129529') //1WD2
+        const h = message.guild.roles.get('688698682178142242') //1WD3
+        const i = message.guild.roles.get('')
+        const filter = (reaction, user) => ['🇦', '🇧', '🇨', '😎', '💨', '🕋', '👉', '👈'].includes(reaction.emoji.name) && user.id === message.author.id;
 
         const embed = new RichEmbed()
             .setTitle('Beschikbare ')
@@ -22,6 +26,9 @@ module.exports.run = async (bot, message, args) =>{
             🇨 ${c.toString()}
             😎 ${d.toString()}
             💨 ${e.toString()}
+            🕋 ${f.toString()}
+            👉 ${g.toString()}
+            👈 ${h.toString()}
             `)
             .setColor(0xdd9323)
             .setFooter(`ID: ${message.author.id}`);
@@ -33,6 +40,9 @@ module.exports.run = async (bot, message, args) =>{
             await msg.react('🇨');
             await msg.react('😎')
             await msg.react('💨')
+            await msg.react('🕋')
+            await msg.react('👉')
+            await msg.react('👈')
             msg.awaitReactions(filter, {
                 max: 1,
                 time: 30000,
@@ -91,6 +101,36 @@ module.exports.run = async (bot, message, args) =>{
                             return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
                         })
                         message.channel.send(`Je bent nu lid van **${e.name}**.`).then(m => m.delete(6000))
+                        break;
+                    case '🕋':
+                        if(message.member.roles.has(f.id)){
+                            return message.channel.send(`Makker, je bent al lid van **${f.name}**.`).then(m => m.delete(6000))
+                        }
+                        message.member.addRole(f).catch(err=>{
+                            console.log(err)
+                            return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
+                        })
+                        message.channel.send(`Je bent nu lid van **${f.name}**.`).then(m => m.delete(6000))
+                        break;
+                    case '👉':
+                        if(message.member.roles.has(g.id)){
+                            return message.channel.send(`Makker, je bent al lid van **${g.name}**.`).then(m => m.delete(6000))
+                        }
+                        message.member.addRole(g).catch(err=>{
+                            console.log(err)
+                            return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
+                        })
+                        message.channel.send(`Je bent nu lid van **${g.name}**.`).then(m => m.delete(6000))
+                        break;
+                    case '👈':
+                        if(message.member.roles.has(h.id)){
+                            return message.channel.send(`Makker, je bent al lid van **${h.name}**.`).then(m => m.delete(6000))
+                        }
+                        message.member.addRole(h).catch(err=>{
+                            console.log(err)
+                            return message.chnnel.send("Oei, er is iets fout gegaan.").then(m => m.delete(6000))
+                        })
+                        message.channel.send(`Je bent nu lid van **${h.name}**.`).then(m => m.delete(6000))
                         break;
                 }
             }).catch(collected => {
