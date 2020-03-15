@@ -34,7 +34,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers`);
-  bot.user.setActivity("over het GLU", {
+  bot.user.setActivity("over het GLU uwu", {
     type: "WATCHING"
   });
 });
@@ -71,13 +71,23 @@ bot.on('guildMemberAdd', member =>{
   con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
     if(err) throw (err)
     if(results.length === 0){
-      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${member.id}', '${member.username}')`, e =>{
+      con.query(`INSERT INTO ungrouped (member_id, member_name) VALUES ('${member.id}', '${member.user.username}')`, e =>{
         if(e) throw(e)
-        console.log("Successfully added " + member.username + ' to the database')
+        console.log(`Successfully added ${member.user.username} to the database`)
       })
     }else{
       return
     }
+ })
+
+ con.query(`SELECT * FROM studenten WHERE student_id =${member.id}`, (e, r)=>{
+   if(e) throw e
+   if(r.length === 0){
+     con.query(`INSERT INTO studenten (student_id, student_name) VALUES('${member.id}', '${member.user.username}')`, e =>{
+       if(e) throw e
+       console.log(`Successfully saved ${member.user.username} in the students table`)
+     })
+   }
  })
  
   con.query(`SELECT * FROM userlevels WHERE userID = ${member.id}`, (err,results) =>{
@@ -85,7 +95,7 @@ bot.on('guildMemberAdd', member =>{
     if(results.length === 0){
       con.query(`INSERT INTO userlevels(userLevel, userId, userName) VALUES('1', '${member.id}', '${member.user.username}')`, e =>{
         if(e) throw (e)
-        console.log('New member added to levels successfully!' + member.id)
+        console.log(`Successfully added ${member.user.username} to the level table`)
       })
     }else{
       return
@@ -110,6 +120,20 @@ bot.on('message', message =>{
       })
     }else{
       return
+    }
+  })
+})
+
+bot.on('message', message =>{
+  if(message.author.bot) return
+  con.query(`SELECT * FROM studenten WHERE student_id = ${message.author.id}`, (e, r)=>{
+    if(e) throw e
+    if(r.length === 0){
+      con.query(`INSERT INTO studenten (student_id, student_name) VALUES('${message.author.id}', '${message.author.username}')`,e =>{
+        if(e) throw e
+
+        console.log(`Successfully added ${message.author.username} to the students table`)
+      })
     }
   })
 })
@@ -207,7 +231,6 @@ bot.on('message', message =>{
   }
 })
 
-//remove klas
 
 bot.on('message', message =>{
   let args = message.content.substring(botconfig.prefix.length).split(" ")
@@ -399,7 +422,7 @@ bot.on('message', message => {
     } else {
       con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
         if (err) throw err;
-        console.log("Successfully added user xp!")
+        console.log(`Successfully added xp to ${message.author.username}`)
       })
     }
     
@@ -415,7 +438,7 @@ bot.on('message', message => {
       if (nxtLvl <= `${results[0].userXP}`) {
         con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
           if (err) throw err;
-          console.log("leveltje omhoog")
+          console.log(`${message.author.username} just levelled up`)
         })
         curLvl = `${results[0].userLevel}`;
 
