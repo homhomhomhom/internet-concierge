@@ -207,6 +207,99 @@ bot.on('message', message =>{
   }
 })
 
+//remove klas
+
+bot.on('message', message =>{
+  let args = message.content.substring(botconfig.prefix.length).split(" ")
+  let member = message.member
+  switch(args[0]){
+    case '2MD1'.toLowerCase():
+      const _2md1 = message.guild.roles.find(r => r.name ==='2MD1')
+      member.removeRole(_2md1).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_2md1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_2md1.name}`)
+      break;
+    case '1WDV1'.toLowerCase():
+      const _1wdv1 = message.guild.roles.find(r => r.name ==='1WDV1')
+      member.removeRole(_1wdv1).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_1wdv1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1wdv1.name}`)
+      break;
+    case '1WDV2'.toLowerCase():
+      const _1wdv2 = message.guild.roles.find(r => r.name ==='1WDV2')
+      member.removeRole(_1wdv2).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_1wdv2.name}**`).then(m=> m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1wdv2.name}`)
+      break;
+    case '2MD2'.toLowerCase():
+      const _2md2 = message.guild.roles.find(r => r.name ==='2MD2')
+      member.removeRole(_2md2).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_2md2.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_2md2.name}`)
+      break;
+    case '3MD1'.toLowerCase():
+      const _3md1 = message.guild.roles.find(r => r.name ==='3MD1')
+      member.removeRole(_3md1).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_3md1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_3md1.name}`)
+      break;
+    case '1WD1'.toLowerCase():
+      const _1wd1 = message.guild.roles.find(r => r.name ==='1WD1')
+      member.removeRole(_1wd1).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_1wd1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1wd1.name}`)
+      break;
+    case '1WD2'.toLowerCase():
+      const _1wd2 = message.guild.roles.find(r => r.name ==='1WD2')
+      member.removeRole(_1wd2).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_1wd2.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1wd2.name}`)
+      break;
+    case '1WD3'.toLowerCase():
+      const _1wd3 = message.guild.roles.find(r => r.name ==='1WD3')
+      member.removeRole(_1wd3).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_1wd3.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1wd3.name}`)
+      break;
+    case '2WD1'.toLowerCase():
+      const _2wd1 = message.guild.roles.find(r => r.name ==='2WD1')
+      member.removeRole(_2wd1).catch(console.error)
+
+      message.channel.send(`Ik heb deze rol bij je weggehaald: **${_2wd1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully adeed ${message.author.username} to ${_2wd1.name}`)
+      break;
+    case '2WD2'.toLowerCase():
+      const _2wd2 = message.guild.roles.find(r => r.name ==='2WD2')
+      member.removeRole(_2wd2).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_2wd2.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_2wd2.name}`)
+      break;
+    case '4IV1'.toLowerCase():
+      const _4iv1 = message.guild.roles.find(r => r.name ==='4IV1')
+      member.removeRole(_4iv1).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_4iv1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_4iv1.name}`)
+      break;
+    case '4IV2'.toLowerCase():
+      const _4iv2 = message.guild.roles.find(r => r.name ==='4IV2')
+      member.removeRole(_4iv2).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_4iv2.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_4iv2.name}`)
+      break;
+  }
+})
+
 
 bot.on('message', message =>{
   if(message.content === botconfig.prefix + 'clear'){
@@ -253,7 +346,7 @@ bot.on('message', message => {
     if (results.length === 0) {
       con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
         if (err) throw (err);
-        console.log("Successfully added " + message.author.id + ' to the database')
+        console.log("Successfully added " + message.author.username + ' to the database')
       })
     } else {
       con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
