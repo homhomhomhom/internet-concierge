@@ -398,7 +398,7 @@ bot.on('message', message =>{
 })
 
 bot.on('guildMemberRemove', member =>{
-  const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
+  const channel = member.guild.channels.find(ch => ch.id ==="687969872621469845")
   if(!channel) return
 
   channel.send(`Oei, daar gaat **${member}** 😔`)
