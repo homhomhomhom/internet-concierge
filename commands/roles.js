@@ -44,7 +44,7 @@ module.exports.run = async (bot, message, args) =>{
                         }
                         message.member.addRole(a).catch(err => {
                             console.log(err);
-                            return message.channel.send(`Er ging iets fout toen ik je je aan deze rol wou toevoegen: **${err.message}**.`);
+                            return message.channel.send(`Er ging iets fout toen ik je aan deze rol wou toevoegen: **${err.message}**.`);
                         });
                         message.channel.send(`Je bent nu lid van **${a.name}**!`).then(m => m.delete(6000));
                         break;
@@ -54,7 +54,7 @@ module.exports.run = async (bot, message, args) =>{
                         }
                         message.member.addRole(b).catch(err => {
                             console.log(err);
-                            return message.channel.send(`Er ging iets fout toen ik je je aan deze rol wou toevoegen: **${err.message}**.`);
+                            return message.channel.send(`Er ging iets fout toen ik je aan deze rol wou toevoegen: **${err.message}**.`);
                         });
                         message.channel.send(`Je bent nu lid van **${b.name}**!`).then(m => m.delete(6000));
                         break;
@@ -64,7 +64,7 @@ module.exports.run = async (bot, message, args) =>{
                         }
                         message.member.addRole(c).catch(err => {
                             console.log(err);
-                            return message.channel.send(`Er ging iets fout toen ik je je aan deze rol wou toevoegen: **${err.message}**.`);
+                            return message.channel.send(`Er ging iets fout toen ik je  aan deze rol wou toevoegen: **${err.message}**.`);
                         });
                         message.channel.send(`Je bent nu lid van **${c.name}**!`).then(m => m.delete(6000));
                         break;
