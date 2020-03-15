@@ -62,7 +62,7 @@ bot.on("message", async message => {
 });
 
 bot.on('guildMemberAdd', member =>{
-  const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
+  const channel = member.guild.channels.find(ch => ch.id ==="687969872621469845")
   const mention = member.guild.channels.find(ch => ch.name === 'regels').toString()
   if(!channel) return
 
