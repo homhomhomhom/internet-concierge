@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) =>{
         const b = message.guild.roles.get('687994568620113968'); // Administrator
         const c = message.guild.roles.get('687976061505765411'); // Developer
         const d = message.guild.roles.get('687976206741667941');
-        const filter = (reaction, user) => ['🇦', '🇧', '🇨', '😎'].includes(reaction.emoji.name) && user.id === message.author.id;
+        const filter = (reaction, user) => ['🇦', '🇧', '🇨', '😎', '💨'].includes(reaction.emoji.name) && user.id === message.author.id;
 
         const embed = new RichEmbed()
             .setTitle('Beschikbare ')
@@ -20,6 +20,7 @@ module.exports.run = async (bot, message, args) =>{
             🇧 ${b.toString()}
             🇨 ${c.toString()}
             😎 ${d.toString()}
+            💨 ${}
             `)
             .setColor(0xdd9323)
             .setFooter(`ID: ${message.author.id}`);
