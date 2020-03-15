@@ -114,6 +114,87 @@ bot.on('message', message =>{
   })
 })
 
+//roles
+
+bot.on('message', message =>{
+  let args = message.content.substring(botconfig.prefix.length).split(" ")
+  const member = message.member
+  switch(args[0]){
+    case '2MD1'.toLowerCase():
+      const _2md1 = message.guild.roles.find(r => r.name ==='2MD1')
+      member.addRole(_2md1).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_2md1.name}**`).then(m => m.delete(6000))
+      break;
+    case '1WDV1'.toLowerCase():
+      const _1wdv1 = message.guild.roles.find(r => r.name ==='1WDV1')
+      member.addRole(_1wdv1).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_1wdv1.name}**`).then(m => m.delete(6000))
+      break;
+    case '1WDV2'.toLowerCase():
+      const _1wdv2 = message.guild.roles.find(r => r.name ==='1WDV2')
+      member.addRole(_1wdv2).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_1wdv2.name}**`).then(m=> m.delete(6000))
+      break;
+    case '2MD2'.toLowerCase():
+      const _2md2 = message.guild.roles.find(r => r.name ==='2MD2')
+      member.addRole(_2md2).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_2md2.name}**`).then(m => m.delete(6000))
+      break;
+    case '3MD1'.toLowerCase():
+      const _3md1 = message.guild.roles.find(r => r.name ==='3MD1')
+      member.addRole(_3md1).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_3md1.name}**`).then(m => m.delete(6000))
+      break;
+    case '1WD1'.toLowerCase():
+      const _1wd1 = message.guild.roles.find(r => r.name ==='1WD1')
+      member.addRole(_1wd1).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_1wd1.name}**`).then(m => m.delete(6000))
+      break;
+    case '1WD2'.toLowerCase():
+      const _1wd2 = message.guild.roles.find(r => r.name ==='1WD2')
+      member.addRole(_1wd2).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_1wd2.name}**`).then(m => m.delete(6000))
+      break;
+    case '1WD3'.toLowerCase():
+      const _1wd3 = message.guild.roles.find(r => r.name ==='1WD3')
+      member.addRole(_1wd3).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_1wd3.name}**`).then(m => m.delete(6000))
+      break;
+    case '2WD1'.toLowerCase():
+      const _2wd1 = message.guild.roles.find(r => r.name ==='2WD1')
+      member.addRole(_2wd1).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_2wd1.name}**`).then(m => m.delete(6000))
+      break;
+    case '2WD2'.toLowerCase():
+      const _2wd2 = message.guild.roles.find(r => r.name ==='2WD2')
+      member.addRole(_2wd2).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_2wd2.name}**`).then(m => m.delete(6000))
+      break;
+    case '4IV1'.toLowerCase():
+      const _4iv1 = message.guild.roles.find(r => r.name ==='4IV1')
+      member.addRole(_4iv1).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_4iv1.name}**`).then(m => m.delete(6000))
+      break;
+    case '4IV2'.toLowerCase():
+      const _4iv2 = message.guild.roles.find(r => r.name ==='4IV2')
+      member.addRole(_4iv2).catch(console.error)
+
+      message.channel.send(`Je bent nu lid van **${_4iv2.name}**`).then(m => m.delete(6000))
+      break;
+  }
+})
+
 
 bot.on('message', message =>{
   if(message.content === botconfig.prefix + 'clear'){
