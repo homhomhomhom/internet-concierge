@@ -64,9 +64,10 @@ bot.on("message", async message => {
 bot.on('guildMemberAdd', member =>{
   const channel = member.guild.channels.find(ch => ch.id ==="687969872621469845")
   const mention = member.guild.channels.find(ch => ch.name === 'regels').toString()
+  const rollen = member.guild.channels.find(ch => ch.name ==='rollen').toString()
   if(!channel) return
 
-  channel.send(`Welkom student ${member} van het GLU! Lees eerst ${mention}`)
+  channel.send(`Welkom student ${member} van het GLU! Lees eerst ${mention} en kijk daarna in ${rollen} om je klas doortegeven`)
 
   con.query(`SELECT * FROM ungrouped WHERE member_id = ${member.id}`, (err, results) =>{
     if(err) throw (err)
@@ -229,6 +230,41 @@ bot.on('message', message =>{
       message.channel.send(`Je bent nu lid van **${_4iv2.name}**`).then(m => m.delete(6000))
       console.log(`Successfully added ${message.author.username} to ${_4iv2.name}`)
       break;
+    case '1CM1'.toLowerCase():
+      const _1cm1 = message.guild.roles.find(r => r.name === '1CM1')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_1cm1).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_1cm1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1cm1.name}`)
+      break
+    case '1CM2'.toLowerCase():
+      const _1cm2 = message.guild.roles.find(r => r.name === '1CM2')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_1cm2).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_1cm2.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1cm2.name}`)
+      break
+    case '2CM1'.toLowerCase():
+      const _2cm1 = message.guild.roles.find(r => r.name === '2CM1')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_2cm1).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_2cm1.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_2cm1.name}`)
+      break
+    case '2CM2'.toLowerCase():
+      const _2cm2 = message.guild.roles.find(r => r.name === '2CM2')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_2cm2).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_2cm2.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_2cm2.name}`)
+      break
+    case '1CM3'.toLowerCase():
+      const _1cm3 = message.guild.roles.find(r => r.name ==='1CM3')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_1cm3).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_1cm3.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1cm3.name}`)
+      break
   }
 })
 
@@ -399,7 +435,7 @@ bot.on('message', message =>{
 })
 
 bot.on('guildMemberRemove', member =>{
-  const channel = member.guild.channels.find(ch => ch.name ==="_meuk_")
+  const channel = member.guild.channels.find(ch => ch.id ==="687969872621469845")
   if(!channel) return
 
   channel.send(`Oei, daar gaat **${member}** 😔`)
