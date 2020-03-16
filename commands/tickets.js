@@ -3,10 +3,14 @@ const Discord = require('discord.js')
 module.exports.run = async(bot, message, args, con) =>{
     con.query(`SELECT * FROM tickets`, (e, r) =>{
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(e) throw e
 =======
         if(err) throw err
 >>>>>>> dev
+=======
+        if(e) throw e
+>>>>>>> develop
         if(r.length === 0){
             message.channel.send('Er zijn geen tickets om weertegeven')
         }else{
