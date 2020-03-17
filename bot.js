@@ -62,6 +62,7 @@ bot.on("message", async message => {
 });
 
 bot.on('guildMemberAdd', member =>{
+  if(message.author.bot) return 
   const channel = member.guild.channels.find(ch => ch.id ==="687969872621469845")
   const mention = member.guild.channels.find(ch => ch.name === 'regels').toString()
   const rollen = member.guild.channels.find(ch => ch.name ==='rollen').toString()
@@ -142,6 +143,7 @@ bot.on('message', message =>{
 //roles
 
 bot.on('message', message =>{
+  if(message.author.bot) return
   let args = message.content.substring(botconfig.prefix.length).split(" ")
   const member = message.member
   const studenten = message.guild.roles.find(r => r.name==='Studenten')
