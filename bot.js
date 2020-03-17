@@ -265,7 +265,30 @@ bot.on('message', message =>{
       message.channel.send(`Je bent nu lid van **${_1cm3.name}**`).then(m => m.delete(6000))
       console.log(`Successfully added ${message.author.username} to ${_1cm3.name}`)
       break
+    case '1CM4'.toLowerCase():
+      const _1cm4 = message.guild.roles.find(r => r.name ==='1CM4')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_1cm4).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_1cm4.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_1cm4.name}`)
+      break
+    case '2CM3'.toLowerCase():
+      const _2cm3 = message.guild.roles.find(r => r.name === '2CM3')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_2cm3).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_2cm3.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.username} to ${_2cm3.name}`)
+      break
+    case '2CM4'.toLowerCase():
+      const _2cm4 = message.guild.roles.find(r => r.name ==='2CM4')
+      member.addRole(studenten).catch(console.error)
+      member.addRole(_2cm4).catch(console.error)
+      message.channel.send(`Je bent nu lid van **${_2cm4.name}**`).then(m => m.delete(6000))
+      console.log(`Successfully added ${message.author.name} to ${_2cm4.name}`)
+      break
+
   }
+
 })
 
 
@@ -277,7 +300,6 @@ bot.on('message', message =>{
       if(member.roles.find(r => r.name === '2MD1')){
       const _2md1 = message.guild.roles.find(r => r.name ==='2MD1')
       member.removeRole(_2md1).catch(console.error)
-
       message.channel.send(`Ik heb deze rol bij je weggehaald: **${_2md1.name}**`).then(m => m.delete(6000))
       console.log(`Successfully added ${message.author.username} to ${_2md1.name}`)
     }else{
@@ -334,7 +356,7 @@ bot.on('message', message =>{
         member.removeRole(_1wd1).catch(console.error)
 
         message.channel.send(`Ik heb deze rol bij je weggehaald: **${_1wd1.name}**`).then(m => m.delete(6000))
-        console.log(`Successfully added ${message.author.username} to ${_1wd1.name}`)
+        console.log(`Successfully removed ${message.author.username} to ${_1wd1.name}`)
       }else{
         return
       }
@@ -429,6 +451,7 @@ bot.on('message', message =>{
   if(message.author.bot) return
   if(message.channel === channelR){
     message.delete(5000)
+    console.log(`I just deleted ${message.content} send by ${message.author.username} in #rollen`)
   }else{
     return
   }
@@ -439,6 +462,7 @@ bot.on('guildMemberRemove', member =>{
   if(!channel) return
 
   channel.send(`Oei, daar gaat **${member}** 😔`)
+  console.log(`${member.user.username} just left the server`)
 })
 
 //level script
@@ -454,7 +478,7 @@ bot.on('message', message => {
     if (results.length === 0) {
       con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
         if (err) throw (err);
-        console.log("Successfully added " + message.author.username + ' to the database')
+        console.log(`Successfully added ${message.author.username} to the database`)
       })
     } else {
       con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
@@ -475,7 +499,7 @@ bot.on('message', message => {
       if (nxtLvl <= `${results[0].userXP}`) {
         con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
           if (err) throw err;
-          console.log(`${message.author.username} just levelled up`)
+          console.log(`${message.author.username} just leveled up`)
         })
         curLvl = `${results[0].userLevel}`;
 

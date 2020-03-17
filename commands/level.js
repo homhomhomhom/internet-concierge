@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args, con) => {
               }
             con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
                 if (err) throw err;
-                console.log("Successfully added " + message.author.id + ' to the database')
+                console.log(`Successfully added ${message.author.username} to the database`)
             })
         } else {
 
@@ -32,6 +32,8 @@ module.exports.run = async (bot, message, args, con) => {
 
 
     })
+
+    console.log(`${message.author.username} used the level command`)
 }
 
 module.exports.help = {
