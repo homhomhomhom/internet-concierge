@@ -286,9 +286,7 @@ bot.on('message', message =>{
       message.channel.send(`Je bent nu lid van **${_2cm4.name}**`).then(m => m.delete(6000))
       console.log(`Successfully added ${message.author.name} to ${_2cm4.name}`)
       break
-
   }
-
 })
 
 
