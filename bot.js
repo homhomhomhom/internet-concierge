@@ -356,7 +356,7 @@ bot.on('message', message =>{
         member.removeRole(_1wd1).catch(console.error)
 
         message.channel.send(`Ik heb deze rol bij je weggehaald: **${_1wd1.name}**`).then(m => m.delete(6000))
-        console.log(`Successfully added ${message.author.username} to ${_1wd1.name}`)
+        console.log(`Successfully removed ${message.author.username} to ${_1wd1.name}`)
       }else{
         return
       }
@@ -451,6 +451,7 @@ bot.on('message', message =>{
   if(message.author.bot) return
   if(message.channel === channelR){
     message.delete(5000)
+    console.log(`I just deleted ${message.content} send by ${message.author.username} in #rollen`)
   }else{
     return
   }
@@ -461,6 +462,7 @@ bot.on('guildMemberRemove', member =>{
   if(!channel) return
 
   channel.send(`Oei, daar gaat **${member}** 😔`)
+  console.log(`${member.user.username} just left the server`)
 })
 
 //level script
@@ -476,7 +478,7 @@ bot.on('message', message => {
     if (results.length === 0) {
       con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
         if (err) throw (err);
-        console.log("Successfully added " + message.author.username + ' to the database')
+        console.log(`Successfully added ${message.author.username} to the database`)
       })
     } else {
       con.query(`UPDATE userlevels SET userXP = ${results[0].userXP + randomXP()} WHERE userID = ${message.author.id}`, err => {
@@ -497,7 +499,7 @@ bot.on('message', message => {
       if (nxtLvl <= `${results[0].userXP}`) {
         con.query(`UPDATE userlevels SET userLevel = ${results[0].userLevel + 1} WHERE userID = ${message.author.id}`, err => {
           if (err) throw err;
-          console.log(`${message.author.username} just levelled up`)
+          console.log(`${message.author.username} just leveled up`)
         })
         curLvl = `${results[0].userLevel}`;
 
