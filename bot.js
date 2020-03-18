@@ -521,7 +521,7 @@ bot.on('message', message => {
   })
 })
 
-client.on('messageDelete', async (message) => {
+bot.on('messageDelete', async (message) => {
     const logs = message.guild.channels.find(channel => channel.name === "bot-log");
     const entry = await message.guild.fetchAuditLogs({ type: 'MESSAGE_DELETE' }).then(audit => audit.entries.first())
     let user = ""
@@ -533,7 +533,7 @@ client.on('messageDelete', async (message) => {
     } else {
         user = message.author.username
     }
-    logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
+    logs.send(`**${message.content}** was deleted in **${message.channel.name}** by **${user}**`);
 })
 
 bot.login(process.env.TOKEN);
