@@ -102,7 +102,11 @@ bot.on('guildMemberAdd', member =>{
       return
     }
   })
+<<<<<<< HEAD
+  const guest = member.guild.roles.find(r => r.name === 'Studenten')
+=======
   const guest = member.guild.roles.find(r => r.name === 'Nieuw Lid')
+>>>>>>> develop
   
   member.addRole(guest).catch(console.error)
   
@@ -511,7 +515,15 @@ bot.on('message', message => {
           .setColor("RANDOM")
           .addField("Nieuw leveltje", `${results[0].userLevel}`)
         
+<<<<<<< HEAD
+<<<<<<< HEAD
           const channelL = bot.channels.find(ch => ch.id ==='687975218253135884')
+=======
+          const channelL = bot.channels.find(ch => ch.id ==='686951092986052620')
+>>>>>>> dev
+=======
+          const channelL = bot.channels.find(ch => ch.id ==='687975218253135884')
+>>>>>>> develop
           if(message.author.bot) return
           channelL.send(lvlup)
       }
