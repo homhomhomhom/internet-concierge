@@ -35,7 +35,7 @@ fs.readdir("./commands/", (err, files) => {
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers`);
   bot.user.setActivity("robots kunnen geen corona krijgen 🤓", {
-    type: "WATCHING"
+    type: "PLAYING"
   });
 });
 
@@ -65,7 +65,10 @@ bot.on('guildMemberAdd', member =>{
   const channel = member.guild.channels.find(ch => ch.id ==="687969872621469845")
   const mention = member.guild.channels.find(ch => ch.name === 'regels').toString()
   const rollen = member.guild.channels.find(ch => ch.name ==='rollen').toString()
-  if(!channel) return
+  if(!channel){
+    console.log('No channel')
+    return
+  }
 
   channel.send(`Welkom student ${member} van het GLU! Lees eerst ${mention} en kijk daarna in ${rollen} om je klas doortegeven`)
 
