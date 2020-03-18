@@ -15,7 +15,7 @@ module.exports.run = async(bot, message, args)=>{
         return message.channel.send("Doei")
     }
     let bReason = args.join(" ").slice(22)
-    if(!bReason) bReason = 'Er is geen reden opgegeven'
+    if(!bReason) bReason = 'Gekoloniseerd'
 
     if(bUser.id === message.author.id){
         message.channel.send ('Je kan jezelf niet bannen')

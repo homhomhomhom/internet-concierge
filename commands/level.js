@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args, con) => {
               }
             con.query(`INSERT INTO userlevels (userID, userXP, userLevel, userName) VALUES ('${message.author.id}', ${randomXP()}, 1, '${message.author.username}')`, err => {
                 if (err) throw err;
-                console.log("Successfully added " + message.author.id + ' to the database')
+                console.log(`Successfully added ${message.author.username} to the database`)
             })
         } else {
 
@@ -25,13 +25,15 @@ module.exports.run = async (bot, message, args, con) => {
                 .setColor("RANDOM")
                 .addField('Level', `${results[0].userLevel}`, true)
                 .addField("XP", `${results[0].userXP}`, true)
-                .setFooter('gluhub_', user.displayAvatarURL)
+                .setFooter('berry is een held', user.displayAvatarURL)
 
             message.channel.send(lvlembed)
         }
 
 
     })
+
+    console.log(`${message.author.username} used the level command`)
 }
 
 module.exports.help = {
