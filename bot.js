@@ -523,7 +523,7 @@ bot.on('message', message => {
   })
 })
 
-client.on('messageDelete', async (message) => {
+bot.on('messageDelete', async (message) => {
     const logs = message.guild.channels.find(channel => channel.name === "bot-log");
     const entry = await message.guild.fetchAuditLogs({ type: 'MESSAGE_DELETE' }).then(audit => audit.entries.first())
     let user = ""
