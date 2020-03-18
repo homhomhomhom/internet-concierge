@@ -34,7 +34,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers`);
-  bot.user.setActivity("robots kunnen geen corona krijgen 🤓", {
+  bot.user.setActivity("GLU bot WEB. gemaakt met ❤️ door Gio ", {
     type: "PLAYING"
   });
 });
