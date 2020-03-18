@@ -537,6 +537,7 @@ bot.on('messageDelete', async (message) => {
         user = message.author.username
     }
     logs.send(`**${message.content}** was deleted in **${message.channel.name}** by **${user}**`);
+    console.log(`${user} delete ${message.content} in ${message.channel.name} send by ${message.author.username}`)
 })
 
 bot.login(process.env.TOKEN);
