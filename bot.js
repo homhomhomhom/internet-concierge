@@ -102,11 +102,9 @@ bot.on('guildMemberAdd', member =>{
       return
     }
   })
-<<<<<<< HEAD
-  const guest = member.guild.roles.find(r => r.name === 'Studenten')
-=======
+
   const guest = member.guild.roles.find(r => r.name === 'Nieuw Lid')
->>>>>>> develop
+
   
   member.addRole(guest).catch(console.error)
   
@@ -515,15 +513,9 @@ bot.on('message', message => {
           .setColor("RANDOM")
           .addField("Nieuw leveltje", `${results[0].userLevel}`)
         
-<<<<<<< HEAD
-<<<<<<< HEAD
+
           const channelL = bot.channels.find(ch => ch.id ==='687975218253135884')
-=======
-          const channelL = bot.channels.find(ch => ch.id ==='686951092986052620')
->>>>>>> dev
-=======
-          const channelL = bot.channels.find(ch => ch.id ==='687975218253135884')
->>>>>>> develop
+
           if(message.author.bot) return
           channelL.send(lvlup)
       }
@@ -531,5 +523,19 @@ bot.on('message', message => {
   })
 })
 
+client.on('messageDelete', async (message) => {
+    const logs = message.guild.channels.find(channel => channel.name === "bot-log");
+    const entry = await message.guild.fetchAuditLogs({ type: 'MESSAGE_DELETE' }).then(audit => audit.entries.first())
+    let user = ""
+    if (entry.extra.channel.id === message.channel.id
+        && (entry.target.id === message.author.id)
+        && (entry.createdTimestamp > (Date.now() - 5000))
+        && (entry.extra.count >= 1)) {
+        user = entry.executor.username
+    } else {
+        user = message.author.username
+    }
+    logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
+})
 
 bot.login(process.env.TOKEN);
