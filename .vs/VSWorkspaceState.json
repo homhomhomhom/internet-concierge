@@ -3,6 +3,10 @@
     "",
     "\\commands"
   ],
+<<<<<<< HEAD
+  "SelectedNode": "\\commands\\help.js",
+=======
   "SelectedNode": "\\commands\\tickets_add.js",
+>>>>>>> dev
   "PreviewInSolutionExplorer": false
 }
