@@ -7,7 +7,7 @@ module.exports.run = async (bot, message,args) =>{
     if(!message.content.startsWith(botconfig.prefix)) return 
     if(message.author.bot) return 
 
-    console.log(`Ik zal je een dm sturen over ${remindtime}`)
+    message.channel.send(`Ik zal je een dm sturen over ${remindtime}`)
 
     setTimeout(()=>{
         message.author.send(`Je hebt **${remindtime}** geleden een reminder gezet om water te drink. Blijf gehydrateerd!!`)
