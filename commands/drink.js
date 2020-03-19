@@ -11,7 +11,7 @@ module.exports.run = async (bot, message,args) =>{
 
     setTimeout(()=>{
         message.author.send(`Je hebt **${remindtime}** geleden een reminder gezet om water te drink. Blijf gehydrateerd!!`)
-    })
+    }, ms(remindtime))
 }
 
 module.exports.help ={
