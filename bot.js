@@ -145,6 +145,7 @@ bot.on('message', message =>{
 
 bot.on('message', message =>{
   if(message.author.bot) return
+  if(message.channel.type === 'dm') return
   let args = message.content.substring(botconfig.prefix.length).split(" ")
   const member = message.member
   const studenten = message.guild.roles.find(r => r.name==='Studenten')
