@@ -544,31 +544,31 @@ bot.login(process.env.TOKEN).then(()=>{
   var guild = bot.guilds.get('687969872621469766')
   const channel = guild.channels.get('689159391483527316')
   if(guild && guild.channels.get('689159391483527316')){
-    schedule.scheduleJob({hour:12, minute:15}, ()=>{
+    schedule.scheduleJob({hour:11, minute:15}, ()=>{
       channel.send('Het is de grote pauze')
     })
     schedule.scheduleJob({hour:10, minute:00}, () =>{
       channel.send('Het is de kleine pauze')
     })
-    schedule.scheduleJob({hour:14, minute:45}, () =>{
+    schedule.scheduleJob({hour:13, minute:45}, () =>{
       channel.send('Het is de laatste kleine pauze van vandaag')
     })
-    schedule.scheduleJob({hour:10, minute:15}, () =>{
+    schedule.scheduleJob({hour:9, minute:15}, () =>{
       channel.send('De kleine pauze is afgelopen!')
     })
-    schedule.scheduleJob({hour:12, minute:45}, () =>{
+    schedule.scheduleJob({hour:11, minute:45}, () =>{
       channel.send('De grote pauze is afgelopen')
     })
-    schedule.scheduleJob({hour:15, minute:00}, () =>{
+    schedule.scheduleJob({hour:14, minute:00}, () =>{
       channel.send('De laatste pauze is afgelopen')
     })
-    schedule.scheduleJob({hour:20, minute:15}, () =>{
+    schedule.scheduleJob({hour:19, minute:15}, () =>{
       channel.send('Het is al donker, vergeet je niet wat te drinken?')
     })
-    schedule.scheduleJob({hour:9, minute:00}, () =>{
+    schedule.scheduleJob({hour:8, minute:00}, () =>{
       channel.send('<@&687973286852034566> Rise and shine gamers, er staat je weer een nieuwe dag te wachten!')
     })
-    schedule.scheduleJob({hour:11, minute:20}, () =>{
+    schedule.scheduleJob({hour:10, minute:20}, () =>{
       channel.send('<@&687973286852034566> Vergeet je niet wat te drinken?')
     })
   }
