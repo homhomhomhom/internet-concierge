@@ -604,9 +604,7 @@ bot.on('message', message =>{
 })
 
 
-// bot.on('message', message =>{
-//   console.log(`${message.channel.name}, ${message.channel.id}`)
-// })
+
 
 bot.login(process.env.TOKEN).then(()=>{
   var guild = bot.guilds.get('687969872621469766')
