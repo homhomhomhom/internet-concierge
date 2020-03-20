@@ -595,13 +595,14 @@ bot.on('message', message =>{
       if(r.length === 0 && message.content.length > 1){
         con.query(`INSERT INTO messages(message_id, message_content, author, author_id, channel_name, channel_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}', '${message.channel.name}', '${message.channel.id}')`, e =>{
           if(e) throw e
-          console.log(`Successfully added ${message.content} send by ${message.author.username} saved in the table`)
+          console.log(`Successfully added ${message.content} send by ${message.author.username} in the table`)
         })
-      }else{
+      }else if (message.content.length === 0){
         console.log(`${message.content} send by ${message.author.username} wasn't long enough to save in the database`)
       }
     })
 })
+
 
 // bot.on('message', message =>{
 //   console.log(`${message.channel.name}, ${message.channel.id}`)
