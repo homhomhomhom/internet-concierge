@@ -587,6 +587,25 @@ function image(message, parts) {
 
 }
 
+//data collection xqcM
+
+bot.on('message', message =>{
+    con.query(`SELECT * FROM messages WHERE message_id = ${message.id}` ,(e, r) =>{
+      if(e) throw e
+      if(r.length === 0){
+        con.query(`INSERT INTO messages(message_id, message_content, author, author_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}')`, e =>{
+          if(e) throw e
+          console.log(`Successfully added ${message.content} to the table`)
+        })
+      }
+
+    })
+})
+
+bot.on('message', message =>{
+  console.log(`${message.id}, ${message.content}, ${message.author.username}, ${message.author.id}`)
+})
+
 
 bot.login(process.env.TOKEN).then(()=>{
   var guild = bot.guilds.get('687969872621469766')
