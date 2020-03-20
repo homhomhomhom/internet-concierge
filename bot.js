@@ -592,19 +592,17 @@ function image(message, parts) {
 bot.on('message', message =>{
     con.query(`SELECT * FROM messages WHERE message_id = ${message.id}` ,(e, r) =>{
       if(e) throw e
-      if(r.length === 0){
+      if(r.length === 0 && message.content.length > 1){
         con.query(`INSERT INTO messages(message_id, message_content, author, author_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}')`, e =>{
           if(e) throw e
           console.log(`Successfully added ${message.content} send by ${message.author.username} to the table`)
         })
+      }else{
+        console.log(`${message.content} send by ${message.author.username} wasn't long enough to save in the database`)
       }
-
     })
 })
 
-bot.on('message', message =>{
-  console.log(`${message.id}, ${message.content}, ${message.author.username}, ${message.author.id}`)
-})
 
 
 bot.login(process.env.TOKEN).then(()=>{
