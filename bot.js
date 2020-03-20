@@ -595,7 +595,7 @@ bot.on('message', message =>{
       if(r.length === 0){
         con.query(`INSERT INTO messages(message_id, message_content, author, author_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}')`, e =>{
           if(e) throw e
-          console.log(`Successfully added ${message.content} to the table`)
+          console.log(`Successfully added ${message.content} send by ${message.author.username} to the table`)
         })
       }
 
