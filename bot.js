@@ -582,6 +582,7 @@ function image(message, parts) {
       }
 
       message.channel.send( urls[0] );
+      console.log(`${message.author.username} just requested an image for ${search}`)
   });
 
 }
