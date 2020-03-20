@@ -11,10 +11,19 @@ require('dotenv').config()
 const mysql = require("mysql")
 const schedule = require('node-schedule')
 const con = mysql.createConnection(process.env.JAWSDB_URL)
+const Twitter = require('twit')
 con.connect(e =>{
   if(e) throw (e)
   console.log('Connected to database')
 })
+const twitterConf = {
+  consumer_key: process.env.TCK,
+  consumer_secret: process.env.TCS,
+  access_token:process.env.TATK,
+  access_token_secret: process.env.TATS
+}
+
+const tc = new Twitter(twitterConf)
 
 fs.readdir("./commands/", (err, files) => {
   if (err) console.log(err);
@@ -603,6 +612,19 @@ bot.on('message', message =>{
     })
 })
 
+
+//twitter feed
+const dest ='690615557426249768'
+
+const stream = tc.stream('statuses/filter', {
+  follow:'7174972' 
+})
+
+stream.on('tweet', tweet =>{
+  const tM = `${tweet.user.name} (@${tweet.user.screen_name}) heeft dit zojuist getweet: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+  bot.channels.get(dest).send(tM)
+  return false
+})
 
 
 
