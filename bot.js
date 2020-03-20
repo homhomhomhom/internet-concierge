@@ -543,23 +543,21 @@ bot.on('messageDelete', async (message) => {
 
 bot.on("message", function(message) {
  
-  var parts = message.content.split(" "); // Splits message into an array for every space, our layout: "<command> [search query]" will become ["<command>", "search query"]
+  var parts = message.content.split(" "); 
+  
+  if (parts[0] === ".image") { 
 
-  /* Simple command manager */
-  if (parts[0] === ".image") { // Check if first part of message is image command
 
-      // call the image function
-      image(message, parts); // Pass requester message to image function
-
+      image(message, parts); 
   }
 
 });
 
 function image(message, parts) {
 
-  /* extract search query from message */
+  
 
-  var search = parts.slice(1).join(" "); // Slices of the command part of the array ["!image", "cute", "dog"] ---> ["cute", "dog"] ---> "cute dog"
+  var search = parts.slice(1).join(" "); 
 
   var options = {
       url: "http://results.dogpile.com/serp?qc=images&q=" + search,
@@ -579,12 +577,12 @@ function image(message, parts) {
       var links = $(".image a.link");
 
       var urls = new Array(links.length).fill(0).map((v, i) => links.eq(i).attr("href"));
-      console.log(urls);
       if (!urls.length) {
           return;
       }
 
       message.channel.send( urls[0] );
+      console.log(`${message.author.username} just requested an image for ${search}`)
   });
 
 }
