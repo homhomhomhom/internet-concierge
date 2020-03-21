@@ -604,7 +604,7 @@ function image(message, parts) {
 bot.on('message', message =>{
     con.query(`SELECT * FROM messages WHERE message_id = ${message.id}` ,(e, r) =>{
       if(e) throw e
-      if(message.content.includes('heeft dit zojuist getweet: https://twitter.com/'))
+      if(message.content.includes('heeft dit zojuist getweet: https://twitter.com/')) return
       if(r.length === 0 && message.content.length > 1){
         con.query(`INSERT INTO messages(message_id, message_content, author, author_id, channel_name, channel_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}', '${message.channel.name}', '${message.channel.id}')`, e =>{
           if(e) throw e
