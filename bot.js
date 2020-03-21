@@ -634,8 +634,8 @@ stream.on('tweet', tweet =>{
 
 bot.login(process.env.TOKEN).then(()=>{
   var guild = bot.guilds.get('687969872621469766')
-  const channel = guild.channels.get('689159391483527316')
-  if(guild && guild.channels.get('689159391483527316')){
+  const channel = guild.channels.get('690882302452039680')
+  if(guild && guild.channels.get('690882302452039680')){
     schedule.scheduleJob({hour:11, minute:15}, ()=>{
       channel.send('Het is de grote pauze')
     })
