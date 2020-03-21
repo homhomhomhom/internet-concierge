@@ -562,6 +562,9 @@ bot.on("message", function(message) {
 
 });
 
+
+
+
 function image(message, parts) {
 
   
@@ -576,7 +579,7 @@ function image(message, parts) {
           "User-Agent": "Chrome"
       }
   };
-  request(options, function(error, response, responseBody) {
+  request(options,(error, response, responseBody) => {
       if (error) {
           return;
       }
@@ -601,6 +604,7 @@ function image(message, parts) {
 bot.on('message', message =>{
     con.query(`SELECT * FROM messages WHERE message_id = ${message.id}` ,(e, r) =>{
       if(e) throw e
+      if(message.content.includes('heeft dit zojuist getweet: https://twitter.com/'))
       if(r.length === 0 && message.content.length > 1){
         con.query(`INSERT INTO messages(message_id, message_content, author, author_id, channel_name, channel_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}', '${message.channel.name}', '${message.channel.id}')`, e =>{
           if(e) throw e
@@ -657,7 +661,7 @@ bot.login(process.env.TOKEN).then(()=>{
       channel.send('<@&687973286852034566> Rise and shine gamers, er staat je weer een nieuwe dag te wachten!')
     })
     schedule.scheduleJob({hour:10, minute:20}, () =>{
-      channel.send('<@&687973286852034566> Vergeet je niet wat te drinken?')
+      channel.send('Vergeet je niet wat te drinken?')
     })
   }
 })
