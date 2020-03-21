@@ -658,7 +658,7 @@ bot.login(process.env.TOKEN).then(()=>{
       channel.send('Het is al donker, vergeet je niet wat te drinken?')
     })
     schedule.scheduleJob({hour:8, minute:00}, () =>{
-      channel.send('<@&687973286852034566> Rise and shine gamers, er staat je weer een nieuwe dag te wachten!')
+      channel.send('Rise and shine gamers, er staat je weer een nieuwe dag te wachten!')
     })
     schedule.scheduleJob({hour:10, minute:20}, () =>{
       channel.send('Vergeet je niet wat te drinken?')
