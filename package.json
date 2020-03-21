@@ -19,6 +19,7 @@
     "fs": "0.0.1-security",
     "google": "^2.1.0",
     "google-translate-api": "^2.3.0",
+    "got": "^10.6.0",
     "moment": "^2.24.0",
     "ms": "^2.1.2",
     "mysql": "^2.18.1",
@@ -29,8 +30,10 @@
     "random-puppy": "^1.1.0",
     "request": "^2.88.2",
     "setimmediate": "^1.0.5",
+    "snekfetch": "^4.0.4",
     "superagent": "^5.1.0",
     "twit": "^2.2.11",
-    "weather-js": "^2.0.0"
+    "weather-js": "^2.0.0",
+    "ytdl-core": "^2.0.0"
   }
 }
