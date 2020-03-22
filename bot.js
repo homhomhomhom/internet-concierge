@@ -598,18 +598,29 @@ image = (message, parts)  => {
 //data collection xqcM
 
 bot.on('message', message =>{
-    con.query(`SELECT * FROM messages WHERE message_id = ${message.id}` ,(e, r) =>{
-      if(e) throw e
-      if(message.content.includes('heeft dit zojuist getweet: https://twitter.com/')) return
-      if(r.length === 0 && message.content.length > 1){
-        con.query(`INSERT INTO messages(message_id, message_content, author, author_id, channel_name, channel_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}', '${message.channel.name}', '${message.channel.id}')`, e =>{
-          if(e) throw e
-          console.log(`Successfully added ${message.content} send by ${message.author.username} in the table`)
-        })
-      }else if (message.content.length === 0){
-        console.log(`${message.content} send by ${message.author.username} wasn't long enough to save in the database`)
-      }
-    })
+  con.query(`SELECT * FROM messages WHERE message_id = ${message.id}` ,(e, r) =>{
+    if(e) throw e
+    if(message.content.includes('heeft dit zojuist getweet: https://twitter.com/')) return
+    if(r.length === 0 && message.content.length > 1){
+      con.query(`INSERT INTO messages(message_id, message_content, author, author_id, channel_name, channel_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}', '${message.channel.name}', '${message.channel.id}')`, e =>{
+        if(e) throw e
+        console.log(`Successfully added ${message.content} send by ${message.author.username} in the table`)
+      })
+    }else if (message.content.length === 0){
+      console.log(`${message.content} send by ${message.author.username} wasn't long enough to save in the database`)
+    }
+  })
+  con.query(`SELECT * FROM messages`, (e, r)=>{
+    if(e) throw e
+    if(message.content.length > 1){
+      con.query(`UPDATE messages SET total_messages = ${r[0].total_messages + 1}`, e =>{
+        if(e) throw e;
+        console.log(`Successfully updated total messages to ${r[0].total_messages}`)
+      })
+    }else{
+      console.log('Message not long enough')
+    }
+  })
 })
 
 
