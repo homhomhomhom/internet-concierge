@@ -612,6 +612,7 @@ bot.on('message', message =>{
   })
   con.query(`SELECT * FROM messages`, (e, r)=>{
     if(e) throw e
+    if(message.content.includes("heeft dit zojuist getweet: https://twitter.com/")) return
     if(message.content.length > 1){
       con.query(`UPDATE messages SET total_messages = ${r[0].total_messages + 1}`, e =>{
         if(e) throw e;
