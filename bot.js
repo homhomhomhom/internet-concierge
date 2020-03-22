@@ -564,14 +564,10 @@ bot.on("message", function(message) {
 
 
 
+image = (message, parts)  => {
+  let search = parts.slice(1).join(" "); 
 
-function image(message, parts) {
-
-  
-
-  var search = parts.slice(1).join(" "); 
-
-  var options = {
+  let options = {
       url: "http://results.dogpile.com/serp?qc=images&q=" + search,
       method: "GET",
       headers: {
