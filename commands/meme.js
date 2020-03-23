@@ -9,7 +9,9 @@ module.exports.run = async (bot, message, args) =>{
         "MemeEconomy",
         "meirl",
         "me_irl",
-        'surrealmemes'
+        'surrealmemes',
+        'ik_ihe',
+        'cirkeltrek',
     ]
 
     let subreddit = reddit[Math.floor(Math.random() * reddit.length)]
