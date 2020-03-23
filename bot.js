@@ -3,19 +3,27 @@ const fs = require("fs");
 const bot = new Discord.Client({
   partials: Object.values(["MESSAGE", "CHANNEL"]),
 });
+const cheerio = require('cheerio')
+const request = require('request')
 const botconfig = require("./botconfig.json");
 bot.commands = new Discord.Collection();
 require('dotenv').config()
 const mysql = require("mysql")
+const schedule = require('node-schedule')
 const con = mysql.createConnection(process.env.JAWSDB_URL)
-
+const Twitter = require('twit')
 con.connect(e =>{
   if(e) throw (e)
   console.log('Connected to database')
 })
+const twitterConf = {
+  consumer_key: process.env.TCK,
+  consumer_secret: process.env.TCS,
+  access_token:process.env.TATK,
+  access_token_secret: process.env.TATS
+}
 
-
-
+const tc = new Twitter(twitterConf)
 
 fs.readdir("./commands/", (err, files) => {
   if (err) console.log(err);
@@ -148,6 +156,7 @@ bot.on('message', message =>{
 
 bot.on('message', message =>{
   if(message.author.bot) return
+  if(message.channel.type === 'dm') return
   let args = message.content.substring(botconfig.prefix.length).split(" ")
   const member = message.member
   const studenten = message.guild.roles.find(r => r.name==='Studenten')
@@ -540,4 +549,127 @@ bot.on('messageDelete', async (message) => {
     console.log(`${user} delete ${message.content} in ${message.channel.name} send by ${message.author.username}`)
 })
 
-bot.login(process.env.TOKEN);
+
+bot.on("message", function(message) {
+ 
+  var parts = message.content.split(" "); 
+  
+  if (parts[0] === ".image") { 
+
+
+      image(message, parts); 
+  }
+
+});
+
+
+
+image = (message, parts)  => {
+  let search = parts.slice(1).join(" "); 
+
+  let options = {
+      url: "http://results.dogpile.com/serp?qc=images&q=" + search,
+      method: "GET",
+      headers: {
+          "Accept": "text/html",
+          "User-Agent": "Chrome"
+      }
+  };
+  request(options,(error, response, responseBody) => {
+      if (error) {
+          return;
+      }
+
+
+      $ = cheerio.load(responseBody);
+      var links = $(".image a.link");
+
+      var urls = new Array(links.length).fill(0).map((v, i) => links.eq(i).attr("href"));
+      if (!urls.length) {
+          return;
+      }
+
+      message.channel.send( urls[0] );
+      console.log(`${message.author.username} just requested an image for ${search}`)
+  });
+
+}
+
+//data collection xqcM
+
+bot.on('message', message =>{
+  con.query(`SELECT * FROM messages WHERE message_id = ${message.id}` ,(e, r) =>{
+    if(e) throw e
+    if(message.content.includes('heeft dit zojuist getweet: https://twitter.com/')) return
+    if(r.length === 0 && message.content.length > 1){
+      con.query(`INSERT INTO messages(message_id, message_content, author, author_id, channel_name, channel_id) VALUES('${message.id}', '${message.content}', '${message.author.username}' , '${message.author.id}', '${message.channel.name}', '${message.channel.id}')`, e =>{
+        if(e) throw e
+        console.log(`Successfully added ${message.content} send by ${message.author.username} in the table`)
+      })
+    }else if (message.content.length === 0){
+      console.log(`${message.content} send by ${message.author.username} wasn't long enough to save in the database`)
+    }
+  })
+  con.query(`SELECT * FROM messages`, (e, r)=>{
+    if(e) throw e
+    if(message.content.includes("heeft dit zojuist getweet: https://twitter.com/")) return
+    if(message.content.length > 1){
+      con.query(`UPDATE messages SET total_messages = ${r[0].total_messages + 1}`, e =>{
+        if(e) throw e;
+        console.log(`Successfully updated total messages to ${r[0].total_messages}`)
+      })
+    }else{
+      console.log('Message not long enough')
+    }
+  })
+})
+
+
+//twitter feed
+const dest ='690615557426249768'
+
+const stream = tc.stream('statuses/filter', {
+  follow:'7174972' 
+})
+
+stream.on('tweet', tweet =>{
+  const tM = `${tweet.user.name} (@${tweet.user.screen_name}) heeft dit zojuist getweet: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+  bot.channels.get(dest).send(tM)
+  return false
+})
+
+
+
+bot.login(process.env.TOKEN).then(()=>{
+  var guild = bot.guilds.get('687969872621469766')
+  const channel = guild.channels.get('690882302452039680')
+  if(guild && guild.channels.get('690882302452039680')){
+    schedule.scheduleJob({hour:11, minute:15}, ()=>{
+      channel.send('Het is de grote pauze')
+    })
+    schedule.scheduleJob({hour:9, minute:00}, () =>{
+      channel.send('Het is de kleine pauze')
+    })
+    schedule.scheduleJob({hour:13, minute:45}, () =>{
+      channel.send('Het is de laatste kleine pauze van vandaag')
+    })
+    schedule.scheduleJob({hour:9, minute:15}, () =>{
+      channel.send('De kleine pauze is afgelopen!')
+    })
+    schedule.scheduleJob({hour:11, minute:45}, () =>{
+      channel.send('De grote pauze is afgelopen')
+    })
+    schedule.scheduleJob({hour:14, minute:00}, () =>{
+      channel.send('De laatste pauze is afgelopen')
+    })
+    schedule.scheduleJob({hour:19, minute:15}, () =>{
+      channel.send('Het is al donker, vergeet je niet wat te drinken?')
+    })
+    schedule.scheduleJob({hour:8, minute:00}, () =>{
+      channel.send('Rise and shine gamers, er staat je weer een nieuwe dag te wachten!')
+    })
+    schedule.scheduleJob({hour:10, minute:20}, () =>{
+      channel.send('Vergeet je niet wat te drinken?')
+    })
+  }
+})
