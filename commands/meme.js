@@ -3,16 +3,15 @@ const rp = require('random-puppy')
 module.exports.run = async (bot, message, args) =>{
 
     let reddit = [
-        "meme",
-        "animemes",
-        "MemesOfAnime",
-        "animememes",
         "dankmemes",
         "dankmeme",
         "wholesomememes",
         "MemeEconomy",
         "meirl",
         "me_irl",
+        'surrealmemes',
+        'ik_ihe',
+        'cirkeltrek',
     ]
 
     let subreddit = reddit[Math.floor(Math.random() * reddit.length)]
